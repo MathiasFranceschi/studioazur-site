@@ -4,10 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-Content-Type-Options" content="nosniff">
-    <meta http-equiv="X-Frame-Options" content="DENY">
+
     <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
     <meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=()">
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; script-src 'self' 'unsafe-inline'; frame-ancestors 'none';">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; script-src 'self' 'unsafe-inline'; img-src 'self' data:;">
     <title>Prévisualisez votre site | Studio Azur</title>
     <meta name="description" content="Découvrez à quoi ressemblera votre site web professionnel en 30 secondes. Entrez vos informations et visualisez le résultat instantanément.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -886,9 +886,18 @@
                 document.getElementById('bizCity').value = ville;
                 document.getElementById('bizPhone').value = tel;
 
-                // Skip loading, go straight to preview
+                // Generate preview and show immediately
                 generatePreview({ name: nom, trade: metier, city: ville, phone: tel });
-                showState(statePreview);
+
+                // Force visibility: bypass CSS transitions on initial load
+                stateForm.classList.add('hidden');
+                stateForm.style.display = 'none';
+                stateLoading.classList.add('hidden');
+                stateLoading.style.display = 'none';
+                statePreview.classList.remove('hidden');
+                statePreview.style.opacity = '1';
+                statePreview.style.transform = 'none';
+                statePreview.style.position = 'static';
             }
         })();
     </script>
