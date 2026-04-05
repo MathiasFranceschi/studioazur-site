@@ -870,6 +870,27 @@
             showState(stateForm);
             window.scrollTo({ top: 0, behavior: 'smooth' });
         });
+
+        // URL params: auto-generate preview if params present
+        (function() {
+            var urlParams = new URLSearchParams(window.location.search);
+            var nom = urlParams.get('nom');
+            var metier = urlParams.get('metier');
+            var ville = urlParams.get('ville');
+            var tel = urlParams.get('tel') || '';
+
+            if (nom && metier && ville && TRADES[metier]) {
+                // Pre-fill form fields (so "Modifier" works)
+                document.getElementById('bizName').value = nom;
+                document.getElementById('bizTrade').value = metier;
+                document.getElementById('bizCity').value = ville;
+                document.getElementById('bizPhone').value = tel;
+
+                // Skip loading, go straight to preview
+                generatePreview({ name: nom, trade: metier, city: ville, phone: tel });
+                showState(statePreview);
+            }
+        })();
     </script>
 </body>
 </html>
