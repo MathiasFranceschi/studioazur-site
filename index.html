@@ -1,0 +1,1282 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Studio Azur — Agence Web pour Artisans & Commerces | Côte d'Azur</title>
+    <meta name="description" content="Studio Azur conçoit des sites web premium pour artisans et commerces de proximité sur la Côte d'Azur. Design sur-mesure, SEO local, résultats concrets.">
+    <meta property="og:title" content="Studio Azur — Sites Web Premium pour la Côte d'Azur">
+    <meta property="og:description" content="Votre vitrine digitale, à la hauteur de votre savoir-faire. Sites web sur-mesure pour artisans et commerces de la Riviera.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://studioazur.dev">
+    <meta property="og:image" content="https://studioazur.dev/og-image.jpg">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="theme-color" content="#1a1a2e">
+    <link rel="canonical" href="https://studioazur.dev">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,500;0,700;1,500&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --navy: #1a1a2e;
+            --navy-mid: #16213e;
+            --navy-deep: #0f3460;
+            --gold: #e2b714;
+            --gold-light: #f0d060;
+            --white: #ffffff;
+            --white-muted: rgba(255, 255, 255, 0.7);
+            --white-faint: rgba(255, 255, 255, 0.12);
+            --radius: 12px;
+            --radius-sm: 8px;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            font-size: 16px;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--navy);
+            color: var(--white);
+            line-height: 1.6;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* ---- Typography ---- */
+        h1, h2, h3, h4 {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-weight: 700;
+            line-height: 1.15;
+        }
+
+        .section-label {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 1rem;
+        }
+
+        .section-title {
+            font-size: clamp(2rem, 5vw, 3.2rem);
+            margin-bottom: 1.25rem;
+        }
+
+        .section-subtitle {
+            font-size: 1.05rem;
+            color: var(--white-muted);
+            max-width: 560px;
+            line-height: 1.7;
+        }
+
+        /* ---- Layout ---- */
+        .container {
+            width: 100%;
+            max-width: 1120px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        section {
+            padding: 6rem 0;
+        }
+
+        /* ---- Animations ---- */
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes shimmer {
+            0% { background-position: -200% center; }
+            100% { background-position: 200% center; }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
+        }
+
+        .animate {
+            animation: fadeUp 0.8s ease both;
+        }
+
+        .animate-delay-1 { animation-delay: 0.15s; }
+        .animate-delay-2 { animation-delay: 0.3s; }
+        .animate-delay-3 { animation-delay: 0.45s; }
+        .animate-delay-4 { animation-delay: 0.6s; }
+
+        /* ---- Buttons ---- */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 600;
+            text-decoration: none;
+            border: none;
+            cursor: pointer;
+            transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+            border-radius: 100px;
+            padding: 0.9rem 2rem;
+        }
+
+        .btn-primary {
+            background: var(--gold);
+            color: var(--navy);
+        }
+
+        .btn-primary:hover {
+            background: var(--gold-light);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(226, 183, 20, 0.3);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--white);
+            border: 1.5px solid var(--white-faint);
+        }
+
+        .btn-outline:hover {
+            border-color: var(--gold);
+            color: var(--gold);
+            transform: translateY(-2px);
+        }
+
+        /* ---- Navigation ---- */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            padding: 1.25rem 0;
+            background: rgba(26, 26, 46, 0.85);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--white-faint);
+        }
+
+        nav .container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .nav-logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.35rem;
+            font-weight: 700;
+            color: var(--white);
+            text-decoration: none;
+            letter-spacing: -0.02em;
+        }
+
+        .nav-logo span {
+            color: var(--gold);
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: var(--white-muted);
+            text-decoration: none;
+            transition: color 0.3s;
+            letter-spacing: 0.01em;
+        }
+
+        .nav-links a:hover {
+            color: var(--white);
+        }
+
+        .nav-cta {
+            background: var(--gold);
+            color: var(--navy) !important;
+            padding: 0.55rem 1.3rem;
+            border-radius: 100px;
+            font-weight: 600 !important;
+        }
+
+        .nav-cta:hover {
+            background: var(--gold-light);
+        }
+
+        /* Mobile nav toggle */
+        .nav-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            background: none;
+            border: none;
+            padding: 4px;
+        }
+
+        .nav-toggle span {
+            width: 22px;
+            height: 2px;
+            background: var(--white);
+            border-radius: 2px;
+            transition: 0.3s;
+        }
+
+        /* ---- Hero ---- */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            padding-top: 5rem;
+            background:
+                radial-gradient(ellipse 80% 60% at 70% 20%, rgba(15, 52, 96, 0.5) 0%, transparent 70%),
+                radial-gradient(ellipse 50% 40% at 20% 80%, rgba(22, 33, 62, 0.6) 0%, transparent 70%),
+                var(--navy);
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -40%;
+            right: -20%;
+            width: 800px;
+            height: 800px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(226, 183, 20, 0.04) 0%, transparent 70%);
+            animation: float 8s ease-in-out infinite;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--white-faint), transparent);
+        }
+
+        .hero .container {
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-content {
+            max-width: 680px;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: var(--white-faint);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 100px;
+            padding: 0.4rem 1rem 0.4rem 0.6rem;
+            font-size: 0.78rem;
+            font-weight: 500;
+            color: var(--white-muted);
+            margin-bottom: 2rem;
+            animation: fadeUp 0.6s ease both;
+        }
+
+        .hero-badge-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--gold);
+            flex-shrink: 0;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.6rem, 6.5vw, 4.2rem);
+            letter-spacing: -0.03em;
+            margin-bottom: 1.5rem;
+            animation: fadeUp 0.8s ease 0.1s both;
+        }
+
+        .hero h1 em {
+            font-style: italic;
+            color: var(--gold);
+            background: linear-gradient(90deg, var(--gold), var(--gold-light), var(--gold));
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: shimmer 4s linear infinite;
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            color: var(--white-muted);
+            max-width: 520px;
+            line-height: 1.75;
+            margin-bottom: 2.5rem;
+            animation: fadeUp 0.8s ease 0.25s both;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            animation: fadeUp 0.8s ease 0.4s both;
+        }
+
+        /* Decorative grid */
+        .hero-grid {
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            width: 45%;
+            opacity: 0.03;
+            background-image:
+                linear-gradient(var(--white) 1px, transparent 1px),
+                linear-gradient(90deg, var(--white) 1px, transparent 1px);
+            background-size: 60px 60px;
+            mask-image: radial-gradient(ellipse 70% 70% at 50% 50%, black, transparent);
+            -webkit-mask-image: radial-gradient(ellipse 70% 70% at 50% 50%, black, transparent);
+        }
+
+        /* ---- Services ---- */
+        .services {
+            background:
+                linear-gradient(180deg, var(--navy) 0%, var(--navy-mid) 100%);
+            position: relative;
+        }
+
+        .services-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .services-header .section-subtitle {
+            margin: 0 auto;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+        }
+
+        .service-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--white-faint);
+            border-radius: var(--radius);
+            padding: 2.5rem 2rem;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--gold), transparent);
+            opacity: 0;
+            transition: opacity 0.4s;
+        }
+
+        .service-card:hover {
+            background: rgba(255, 255, 255, 0.06);
+            border-color: rgba(226, 183, 20, 0.2);
+            transform: translateY(-4px);
+        }
+
+        .service-card:hover::before {
+            opacity: 1;
+        }
+
+        .service-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: var(--radius-sm);
+            background: linear-gradient(135deg, var(--navy-deep), var(--navy-mid));
+            border: 1px solid var(--white-faint);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+            font-size: 1.3rem;
+        }
+
+        .service-card h3 {
+            font-family: 'Inter', sans-serif;
+            font-size: 1.15rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+        }
+
+        .service-card p {
+            font-size: 0.92rem;
+            color: var(--white-muted);
+            line-height: 1.7;
+        }
+
+        .service-tag {
+            display: inline-block;
+            margin-top: 1.25rem;
+            font-size: 0.75rem;
+            font-weight: 500;
+            color: var(--gold);
+            padding: 0.3rem 0.8rem;
+            border: 1px solid rgba(226, 183, 20, 0.25);
+            border-radius: 100px;
+        }
+
+        /* ---- Pourquoi nous ---- */
+        .why {
+            background: var(--navy-mid);
+            position: relative;
+        }
+
+        .why::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--white-faint), transparent);
+        }
+
+        .why-layout {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .why-content .section-subtitle {
+            margin-bottom: 2.5rem;
+        }
+
+        .why-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .why-item {
+            display: flex;
+            gap: 1rem;
+            align-items: flex-start;
+        }
+
+        .why-item-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(226, 183, 20, 0.1);
+            border: 1px solid rgba(226, 183, 20, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            font-size: 1rem;
+            margin-top: 2px;
+        }
+
+        .why-item h4 {
+            font-family: 'Inter', sans-serif;
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 0.3rem;
+        }
+
+        .why-item p {
+            font-size: 0.88rem;
+            color: var(--white-muted);
+            line-height: 1.65;
+        }
+
+        .why-visual {
+            position: relative;
+        }
+
+        .why-stats {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.25rem;
+        }
+
+        .stat-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--white-faint);
+            border-radius: var(--radius);
+            padding: 2rem 1.5rem;
+            text-align: center;
+            transition: all 0.3s;
+        }
+
+        .stat-card:hover {
+            border-color: rgba(226, 183, 20, 0.2);
+        }
+
+        .stat-number {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: var(--gold);
+            margin-bottom: 0.3rem;
+        }
+
+        .stat-label {
+            font-size: 0.8rem;
+            color: var(--white-muted);
+            font-weight: 500;
+        }
+
+        /* ---- Tarifs ---- */
+        .pricing {
+            background:
+                radial-gradient(ellipse 60% 50% at 50% 0%, rgba(15, 52, 96, 0.3) 0%, transparent 70%),
+                var(--navy);
+            position: relative;
+        }
+
+        .pricing::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--white-faint), transparent);
+        }
+
+        .pricing-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .pricing-header .section-subtitle {
+            margin: 0 auto;
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            align-items: start;
+        }
+
+        .price-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--white-faint);
+            border-radius: var(--radius);
+            padding: 2.5rem 2rem;
+            position: relative;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .price-card:hover {
+            transform: translateY(-4px);
+            border-color: rgba(255, 255, 255, 0.15);
+        }
+
+        .price-card.featured {
+            border-color: rgba(226, 183, 20, 0.35);
+            background: linear-gradient(170deg, rgba(226, 183, 20, 0.06) 0%, rgba(255, 255, 255, 0.03) 40%);
+        }
+
+        .price-card.featured:hover {
+            border-color: rgba(226, 183, 20, 0.5);
+        }
+
+        .price-badge {
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--gold);
+            color: var(--navy);
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            padding: 0.3rem 1rem;
+            border-radius: 100px;
+        }
+
+        .price-tier {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.8rem;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--white-muted);
+            margin-bottom: 1rem;
+        }
+
+        .price-amount {
+            display: flex;
+            align-items: baseline;
+            gap: 0.25rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .price-amount .value {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            font-weight: 700;
+            letter-spacing: -0.03em;
+        }
+
+        .price-card.featured .price-amount .value {
+            color: var(--gold);
+        }
+
+        .price-amount .currency {
+            font-size: 1.1rem;
+            font-weight: 500;
+            color: var(--white-muted);
+        }
+
+        .price-desc {
+            font-size: 0.88rem;
+            color: var(--white-muted);
+            margin-bottom: 2rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--white-faint);
+        }
+
+        .price-features {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0.85rem;
+            margin-bottom: 2rem;
+        }
+
+        .price-features li {
+            font-size: 0.88rem;
+            color: var(--white-muted);
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .price-features li::before {
+            content: '';
+            width: 5px;
+            height: 5px;
+            border-radius: 50%;
+            background: var(--gold);
+            flex-shrink: 0;
+        }
+
+        .price-card .btn {
+            width: 100%;
+            justify-content: center;
+        }
+
+        /* ---- Contact ---- */
+        .contact {
+            background: var(--navy-mid);
+            position: relative;
+        }
+
+        .contact::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--white-faint), transparent);
+        }
+
+        .contact-layout {
+            display: grid;
+            grid-template-columns: 1fr 1.1fr;
+            gap: 4rem;
+            align-items: start;
+        }
+
+        .contact-info h2 {
+            margin-bottom: 1rem;
+        }
+
+        .contact-info .section-subtitle {
+            margin-bottom: 2rem;
+        }
+
+        .contact-detail {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-size: 0.92rem;
+            color: var(--white-muted);
+            margin-bottom: 1rem;
+        }
+
+        .contact-detail-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: var(--white-faint);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.85rem;
+            flex-shrink: 0;
+        }
+
+        .contact-form {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--white-faint);
+            border-radius: var(--radius);
+            padding: 2.5rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.25rem;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 0.82rem;
+            font-weight: 500;
+            color: var(--white-muted);
+            margin-bottom: 0.4rem;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--white-faint);
+            border-radius: var(--radius-sm);
+            padding: 0.8rem 1rem;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.9rem;
+            color: var(--white);
+            transition: border-color 0.3s;
+            outline: none;
+        }
+
+        .form-group input::placeholder,
+        .form-group textarea::placeholder {
+            color: rgba(255, 255, 255, 0.3);
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            border-color: var(--gold);
+        }
+
+        .form-group select {
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='rgba(255,255,255,0.5)' viewBox='0 0 16 16'%3E%3Cpath d='M8 11L3 6h10z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 1rem center;
+            cursor: pointer;
+        }
+
+        .form-group select option {
+            background: var(--navy);
+            color: var(--white);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .contact-form .btn {
+            width: 100%;
+            justify-content: center;
+            padding: 1rem;
+            font-size: 0.95rem;
+        }
+
+        /* ---- Footer ---- */
+        footer {
+            background: var(--navy);
+            border-top: 1px solid var(--white-faint);
+            padding: 3rem 0;
+        }
+
+        .footer-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+        }
+
+        .footer-brand {
+            display: flex;
+            flex-direction: column;
+            gap: 0.3rem;
+        }
+
+        .footer-brand .nav-logo {
+            font-size: 1.2rem;
+        }
+
+        .footer-brand small {
+            font-size: 0.78rem;
+            color: var(--white-muted);
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 1.5rem;
+            list-style: none;
+        }
+
+        .footer-links a {
+            font-size: 0.82rem;
+            color: var(--white-muted);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: var(--gold);
+        }
+
+        .footer-social {
+            display: flex;
+            gap: 0.75rem;
+        }
+
+        .footer-social a {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: var(--white-faint);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            transition: all 0.3s;
+            font-size: 0.85rem;
+        }
+
+        .footer-social a:hover {
+            background: rgba(226, 183, 20, 0.15);
+            border-color: rgba(226, 183, 20, 0.3);
+        }
+
+        /* ---- Responsive ---- */
+        @media (max-width: 1024px) {
+            .services-grid,
+            .pricing-grid {
+                grid-template-columns: 1fr;
+                max-width: 480px;
+                margin: 0 auto;
+            }
+
+            .why-layout,
+            .contact-layout {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+
+            .why-stats {
+                max-width: 400px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            section {
+                padding: 4rem 0;
+            }
+
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: rgba(26, 26, 46, 0.97);
+                backdrop-filter: blur(20px);
+                flex-direction: column;
+                padding: 1.5rem;
+                gap: 1rem;
+                border-bottom: 1px solid var(--white-faint);
+            }
+
+            .nav-links.open {
+                display: flex;
+            }
+
+            .nav-toggle {
+                display: flex;
+            }
+
+            .hero {
+                min-height: auto;
+                padding: 8rem 0 5rem;
+            }
+
+            .hero h1 {
+                font-size: clamp(2rem, 8vw, 2.8rem);
+            }
+
+            .hero-grid {
+                display: none;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .contact-form {
+                padding: 1.5rem;
+            }
+
+            .footer-content {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .footer-links {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-buttons {
+                flex-direction: column;
+            }
+
+            .hero-buttons .btn {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .why-stats {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .stat-card {
+                padding: 1.25rem 1rem;
+            }
+
+            .price-amount .value {
+                font-size: 2.4rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="container">
+            <a href="#" class="nav-logo">Studio <span>Azur</span></a>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#services">Services</a></li>
+                <li><a href="#pourquoi">Pourquoi nous</a></li>
+                <li><a href="#tarifs">Tarifs</a></li>
+                <li><a href="#contact" class="nav-cta">Nous contacter</a></li>
+            </ul>
+            <button class="nav-toggle" onclick="document.getElementById('navLinks').classList.toggle('open')" aria-label="Menu">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <section class="hero">
+        <div class="hero-grid"></div>
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-badge">
+                    <span class="hero-badge-dot"></span>
+                    Agence web sur la Côte d'Azur
+                </div>
+                <h1>Votre savoir-faire mérite une <em>vitrine digitale</em> à la hauteur</h1>
+                <p>Nous créons des sites web sur-mesure pour les artisans et commerces de la Riviera. Design premium, visibilité locale, résultats mesurables.</p>
+                <div class="hero-buttons">
+                    <a href="#contact" class="btn btn-primary">Demander un devis gratuit</a>
+                    <a href="#tarifs" class="btn btn-outline">Voir les tarifs</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services -->
+    <section class="services" id="services">
+        <div class="container">
+            <div class="services-header">
+                <p class="section-label">Services</p>
+                <h2 class="section-title">Tout ce qu'il faut pour<br>exister en ligne</h2>
+                <p class="section-subtitle">De la conception au référencement, on s'occupe de tout. Vous vous concentrez sur votre métier.</p>
+            </div>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">&#9670;</div>
+                    <h3>Site Vitrine</h3>
+                    <p>Un site élégant qui reflète votre identité. Responsive, rapide, conçu pour convertir vos visiteurs en clients.</p>
+                    <span class="service-tag">Design sur-mesure</span>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">&#9673;</div>
+                    <h3>SEO Local</h3>
+                    <p>Apparaissez en tête des recherches à Nice, Cannes, Antibes. Fiche Google optimisée, mots-clés locaux, contenu ciblé.</p>
+                    <span class="service-tag">Visibilité garantie</span>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">&#9881;</div>
+                    <h3>Maintenance & Suivi</h3>
+                    <p>Mises à jour, sécurité, hébergement, statistiques. Votre site reste performant et protégé, sans effort de votre part.</p>
+                    <span class="service-tag">Sérénité totale</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pourquoi nous -->
+    <section class="why" id="pourquoi">
+        <div class="container">
+            <div class="why-layout">
+                <div class="why-content">
+                    <p class="section-label">Pourquoi nous</p>
+                    <h2 class="section-title">Pas une usine à sites.<br>Un partenaire.</h2>
+                    <p class="section-subtitle">On ne livre pas des templates. On construit des outils de croissance pour votre activité.</p>
+                    <ul class="why-list">
+                        <li class="why-item">
+                            <div class="why-item-icon">&#9889;</div>
+                            <div>
+                                <h4>Livraison rapide</h4>
+                                <p>Votre site en ligne en 7 jours. Pas de semaines de va-et-vient. Un processus clair et efficace.</p>
+                            </div>
+                        </li>
+                        <li class="why-item">
+                            <div class="why-item-icon">&#10022;</div>
+                            <div>
+                                <h4>Design premium</h4>
+                                <p>Chaque pixel est intentionnel. Un design qui inspire confiance et se démarque de la concurrence.</p>
+                            </div>
+                        </li>
+                        <li class="why-item">
+                            <div class="why-item-icon">&#9650;</div>
+                            <div>
+                                <h4>Résultats concrets</h4>
+                                <p>Plus de visites, plus d'appels, plus de clients. On mesure et on optimise en continu.</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="why-visual">
+                    <div class="why-stats">
+                        <div class="stat-card">
+                            <div class="stat-number">7j</div>
+                            <div class="stat-label">Délai de livraison</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number">98%</div>
+                            <div class="stat-label">Clients satisfaits</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number">+140%</div>
+                            <div class="stat-label">Trafic moyen gagné</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number">24/7</div>
+                            <div class="stat-label">Support réactif</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tarifs -->
+    <section class="pricing" id="tarifs">
+        <div class="container">
+            <div class="pricing-header">
+                <p class="section-label">Tarifs</p>
+                <h2 class="section-title">Des formules claires,<br>sans surprise</h2>
+                <p class="section-subtitle">Chaque offre inclut le design, le développement, l'hébergement la première année et la mise en ligne.</p>
+            </div>
+            <div class="pricing-grid">
+                <!-- Essentiel -->
+                <div class="price-card">
+                    <p class="price-tier">Essentiel</p>
+                    <div class="price-amount">
+                        <span class="value">590</span>
+                        <span class="currency">&#8364;</span>
+                    </div>
+                    <p class="price-desc">Idéal pour démarrer avec une présence en ligne professionnelle et soignée.</p>
+                    <ul class="price-features">
+                        <li>Site one-page responsive</li>
+                        <li>Design personnalisé</li>
+                        <li>Formulaire de contact</li>
+                        <li>Optimisation mobile</li>
+                        <li>Hébergement 1 an inclus</li>
+                        <li>Mise en ligne sous 5 jours</li>
+                    </ul>
+                    <a href="#contact" class="btn btn-outline">Choisir Essentiel</a>
+                </div>
+                <!-- Pro -->
+                <div class="price-card featured">
+                    <span class="price-badge">Populaire</span>
+                    <p class="price-tier">Pro</p>
+                    <div class="price-amount">
+                        <span class="value">990</span>
+                        <span class="currency">&#8364;</span>
+                    </div>
+                    <p class="price-desc">Pour les pros qui veulent être trouvés en ligne et convertir plus de clients.</p>
+                    <ul class="price-features">
+                        <li>Site multi-pages (jusqu'à 5)</li>
+                        <li>Design premium sur-mesure</li>
+                        <li>SEO local optimisé</li>
+                        <li>Fiche Google My Business</li>
+                        <li>Intégration réseaux sociaux</li>
+                        <li>Hébergement 1 an inclus</li>
+                        <li>Support prioritaire 3 mois</li>
+                    </ul>
+                    <a href="#contact" class="btn btn-primary">Choisir Pro</a>
+                </div>
+                <!-- Premium -->
+                <div class="price-card">
+                    <p class="price-tier">Premium</p>
+                    <div class="price-amount">
+                        <span class="value">1490</span>
+                        <span class="currency">&#8364;</span>
+                    </div>
+                    <p class="price-desc">La solution complète pour dominer votre marché local et automatiser votre prospection.</p>
+                    <ul class="price-features">
+                        <li>Site illimité en pages</li>
+                        <li>Design haut de gamme</li>
+                        <li>SEO local avancé + blog</li>
+                        <li>Système de réservation</li>
+                        <li>Stratégie contenu 6 mois</li>
+                        <li>Hébergement 1 an inclus</li>
+                        <li>Support prioritaire 12 mois</li>
+                        <li>Rapport mensuel de performance</li>
+                    </ul>
+                    <a href="#contact" class="btn btn-outline">Choisir Premium</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact -->
+    <section class="contact" id="contact">
+        <div class="container">
+            <div class="contact-layout">
+                <div class="contact-info">
+                    <p class="section-label">Contact</p>
+                    <h2 class="section-title">Parlons de votre projet</h2>
+                    <p class="section-subtitle">Remplissez le formulaire ou contactez-nous directement. Réponse sous 24h, devis gratuit et sans engagement.</p>
+                    <div style="margin-top: 2rem;">
+                        <div class="contact-detail">
+                            <span class="contact-detail-icon">&#9993;</span>
+                            contact@studioazur.dev
+                        </div>
+                        <div class="contact-detail">
+                            <span class="contact-detail-icon">&#9742;</span>
+                            04 93 XX XX XX
+                        </div>
+                        <div class="contact-detail">
+                            <span class="contact-detail-icon">&#9872;</span>
+                            Côte d'Azur, France
+                        </div>
+                    </div>
+                </div>
+                <form class="contact-form" action="#" method="POST">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="name">Nom complet</label>
+                            <input type="text" id="name" name="name" placeholder="Jean Dupont" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" name="email" placeholder="jean@exemple.fr" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Téléphone</label>
+                        <input type="tel" id="phone" name="phone" placeholder="06 XX XX XX XX">
+                    </div>
+                    <div class="form-group">
+                        <label for="offer">Formule souhaitée</label>
+                        <select id="offer" name="offer">
+                            <option value="">Sélectionnez une formule</option>
+                            <option value="essentiel">Essentiel — 590 &#8364;</option>
+                            <option value="pro">Pro — 990 &#8364;</option>
+                            <option value="premium">Premium — 1 490 &#8364;</option>
+                            <option value="custom">Sur-mesure</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Décrivez votre projet</label>
+                        <textarea id="message" name="message" placeholder="Votre activité, vos besoins, vos objectifs..."></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Envoyer ma demande</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <a href="#" class="nav-logo">Studio <span>Azur</span></a>
+                    <small>studioazur.dev</small>
+                </div>
+                <ul class="footer-links">
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="#tarifs">Tarifs</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                    <li><a href="#">Mentions légales</a></li>
+                </ul>
+                <div class="footer-social">
+                    <a href="#" aria-label="Instagram" title="Instagram">Ig</a>
+                    <a href="#" aria-label="LinkedIn" title="LinkedIn">Li</a>
+                    <a href="#" aria-label="Facebook" title="Facebook">Fb</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>
