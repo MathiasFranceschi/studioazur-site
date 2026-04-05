@@ -1162,20 +1162,20 @@
                 </div>
 
                 <div class="rv rv-d1">
-                    <form class="contact-form" onsubmit="event.preventDefault();">
+                    <form class="contact-form" id="contactForm" action="https://formspree.io/f/xpwzgkba" method="POST">
                         <div class="form-row">
                             <div class="form-group">
                                 <label for="name">Nom</label>
-                                <input type="text" id="name" placeholder="Votre nom">
+                                <input type="text" id="name" name="name" placeholder="Votre nom" required>
                             </div>
                             <div class="form-group">
                                 <label for="email">Email</label>
-                                <input type="email" id="email" placeholder="votre@email.com">
+                                <input type="email" id="email" name="email" placeholder="votre@email.com" required>
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="service">Service</label>
-                            <select id="service">
+                            <select id="service" name="service">
                                 <option value="">Choisir un service</option>
                                 <option>Site Vitrine</option>
                                 <option>SEO Local</option>
@@ -1187,12 +1187,16 @@
                         </div>
                         <div class="form-group">
                             <label for="message">Message</label>
-                            <textarea id="message" placeholder="Décrivez votre projet..."></textarea>
+                            <textarea id="message" name="message" placeholder="Décrivez votre projet..." required></textarea>
                         </div>
-                        <button type="submit" class="btn-fill">
+                        <button type="submit" class="btn-fill" id="contactSubmit">
                             Envoyer
                             <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
                         </button>
+                        <div id="contactSuccess" style="display:none;text-align:center;padding:1.5rem 0;">
+                            <div style="font-family:'Cormorant Garamond',serif;font-size:1.4rem;color:var(--midnight);margin-bottom:.4rem;">Merci !</div>
+                            <div style="font-size:.88rem;color:var(--text-soft);">Votre message a bien été envoyé. Nous vous répondons sous 24h.</div>
+                        </div>
                     </form>
                 </div>
             </div>
@@ -1254,6 +1258,31 @@
             entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
         }, { threshold: 0.15 });
         document.querySelectorAll('.rv').forEach(el => obs.observe(el));
+
+        // Contact form — Formspree AJAX submit
+        var contactForm = document.getElementById('contactForm');
+        contactForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            var btn = document.getElementById('contactSubmit');
+            btn.textContent = 'Envoi en cours...';
+            btn.disabled = true;
+            fetch(contactForm.action, {
+                method: 'POST',
+                body: new FormData(contactForm),
+                headers: { 'Accept': 'application/json' }
+            }).then(function(r) {
+                if (r.ok) {
+                    contactForm.style.display = 'none';
+                    document.getElementById('contactSuccess').style.display = 'block';
+                } else {
+                    btn.textContent = 'Erreur — Réessayer';
+                    btn.disabled = false;
+                }
+            }).catch(function() {
+                btn.textContent = 'Erreur — Réessayer';
+                btn.disabled = false;
+            });
+        });
     </script>
 </body>
 </html>
