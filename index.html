@@ -7,7 +7,7 @@
 
     <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
     <meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=()">
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; script-src 'self' 'unsafe-inline'; connect-src https://formspree.io https://*.formspree.io; form-action https://formspree.io; img-src 'self' data:;">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; script-src 'self' 'unsafe-inline'; connect-src 'self'; form-action 'self'; img-src 'self' data:;">
     <title>Studio Azur — Agence Web pour Artisans & Commerces | Côte d'Azur</title>
     <meta name="description" content="Studio Azur conçoit des sites web premium pour artisans et commerces de proximité sur la Côte d'Azur. Design sur-mesure, SEO local, résultats concrets.">
     <meta property="og:title" content="Studio Azur — Sites Web Premium pour la Côte d'Azur">
@@ -1184,7 +1184,7 @@
                 </div>
 
                 <div class="rv rv-d1">
-                    <form class="contact-form" id="contactForm" action="https://formspree.io/f/xpwzgkba" method="POST">
+                    <form class="contact-form" id="contactForm" action="/api/contact" method="POST">
                         <input type="text" name="_gotcha" style="display:none!important" tabindex="-1" autocomplete="off">
                         <div class="form-row">
                             <div class="form-group">
@@ -1301,7 +1301,7 @@
             });
         });
 
-        // Contact form — Formspree AJAX submit with mailto fallback
+        // Contact form — Cloudflare Pages Function
         var contactForm = document.getElementById('contactForm');
         contactForm.addEventListener('submit', function(e) {
             e.preventDefault();
@@ -1313,30 +1313,17 @@
                 body: new FormData(contactForm),
                 headers: { 'Accept': 'application/json' }
             }).then(function(r) {
-                if (r.ok) {
-                    contactForm.style.display = 'none';
-                    document.getElementById('contactSuccess').style.display = 'block';
-                } else {
-                    // Formspree failed — open mailto as fallback
-                    var name = document.getElementById('name').value;
-                    var email = document.getElementById('email').value;
-                    var service = document.getElementById('service').value;
-                    var message = document.getElementById('message').value;
-                    var subject = encodeURIComponent('Contact Studio Azur — ' + (service || 'Nouveau projet'));
-                    var body = encodeURIComponent('Nom: ' + name + '\nEmail: ' + email + '\nService: ' + service + '\n\n' + message);
-                    window.location.href = 'mailto:contact@studioazur.dev?subject=' + subject + '&body=' + body;
-                    btn.textContent = 'Envoyer';
-                    btn.disabled = false;
-                }
+                return r.json().then(function(data) {
+                    if (r.ok && data.ok) {
+                        contactForm.style.display = 'none';
+                        document.getElementById('contactSuccess').style.display = 'block';
+                    } else {
+                        btn.textContent = data.error || 'Erreur — Réessayer';
+                        btn.disabled = false;
+                    }
+                });
             }).catch(function() {
-                var name = document.getElementById('name').value;
-                var email = document.getElementById('email').value;
-                var service = document.getElementById('service').value;
-                var message = document.getElementById('message').value;
-                var subject = encodeURIComponent('Contact Studio Azur — ' + (service || 'Nouveau projet'));
-                var body = encodeURIComponent('Nom: ' + name + '\nEmail: ' + email + '\nService: ' + service + '\n\n' + message);
-                window.location.href = 'mailto:contact@studioazur.dev?subject=' + subject + '&body=' + body;
-                btn.textContent = 'Envoyer';
+                btn.textContent = 'Erreur réseau — Réessayer';
                 btn.disabled = false;
             });
         });
