@@ -99,28 +99,7 @@
         nav.scrolled .logo { color: var(--midnight); }
         .logo-mark {
             width: 36px; height: 36px;
-            border: 2px solid currentColor;
-            border-radius: 50%;
-            display: flex; align-items: center; justify-content: center;
-            position: relative;
-            overflow: hidden;
-        }
-        .logo-mark::before {
-            content: '';
-            position: absolute;
-            bottom: -2px; left: -2px; right: -2px;
-            height: 50%;
-            background: var(--mer);
-            border-radius: 0 0 50% 50%;
-            opacity: 0.7;
-        }
-        .logo-mark::after {
-            content: '';
-            position: absolute;
-            top: 6px;
-            width: 8px; height: 8px;
-            border-radius: 50%;
-            background: var(--or);
+            flex-shrink: 0;
         }
 
         .nav-links {
@@ -862,10 +841,10 @@
             .hero h1 { font-size: clamp(2.2rem, 5vw, 3.2rem); }
             .services-grid { grid-template-columns: 1fr 1fr; }
             .why-grid { grid-template-columns: 1fr; }
-            .pricing-grid { grid-template-columns: 1fr; max-width: 420px; }
+            .pricing-grid { grid-template-columns: 1fr; max-width: 420px; margin: 0 auto; }
             .price-card { margin-right: 0; margin-bottom: -1px; }
             .price-card.featured { margin: -1px 0; padding: 3rem 2rem; }
-            .contact-grid { grid-template-columns: 1fr; }
+            .contact-grid { grid-template-columns: 1fr 1fr; gap: 2.5rem; }
             .footer-grid { grid-template-columns: 1fr; gap: 2rem; }
         }
         @media (max-width: 768px) {
@@ -875,6 +854,7 @@
             .hero-body { font-size: 0.95rem; }
             .hero-eyebrow { font-size: 0.62rem; }
             .services-grid { grid-template-columns: 1fr; }
+            .contact-grid { grid-template-columns: 1fr; }
             .form-row { grid-template-columns: 1fr; }
             .footer-bottom { flex-direction: column; gap: 0.5rem; text-align: center; }
         }
@@ -915,7 +895,12 @@
     <nav>
         <div class="wrap">
             <a href="#" class="logo">
-                <span class="logo-mark"></span>
+                <svg class="logo-mark" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg" width="36" height="36">
+                    <circle cx="18" cy="18" r="16" stroke="currentColor" stroke-width="2" fill="none"/>
+                    <path d="M2 18 A16 16 0 0 0 34 18 Q28 15 22 18 Q16 21 10 18 Q6 16 2 18 Z" fill="#2b7a9e" opacity="0.7"/>
+                    <path d="M2 18 A16 16 0 0 0 18 34 A16 16 0 0 0 34 18 Q28 15 22 18 Q16 21 10 18 Q6 16 2 18 Z" fill="#2b7a9e" opacity="0.15"/>
+                    <circle cx="18" cy="10" r="4" fill="#c9a84c"/>
+                </svg>
                 Studio Azur
             </a>
             <ul class="nav-links" id="navLinks">
