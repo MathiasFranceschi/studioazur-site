@@ -876,6 +876,35 @@
             .footer-bottom { flex-direction: column; gap: 0.5rem; text-align: center; }
         }
     </style>
+    <script type="application/ld+json">
+    [{
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "Studio Azur",
+        "url": "https://studioazur.dev",
+        "description": "Agence web spécialisée dans la création de sites internet pour artisans et commerces de proximité sur la Côte d'Azur."
+    },{
+        "@context": "https://schema.org",
+        "@type": "LocalBusiness",
+        "name": "Studio Azur",
+        "url": "https://studioazur.dev",
+        "email": "contact@studioazur.dev",
+        "description": "Création de sites web premium pour artisans et commerces — Nice, Cannes, Antibes, Côte d'Azur. Design sur-mesure, SEO local, résultats concrets.",
+        "areaServed": {
+            "@type": "GeoCircle",
+            "geoMidpoint": { "@type": "GeoCoordinates", "latitude": 43.7102, "longitude": 7.2620 },
+            "geoRadius": "50000"
+        },
+        "address": {
+            "@type": "PostalAddress",
+            "addressRegion": "Provence-Alpes-Côte d'Azur",
+            "addressCountry": "FR"
+        },
+        "priceRange": "490€ - 1990€",
+        "serviceType": ["Création de site web", "SEO local", "Design web", "Automatisation business"],
+        "knowsAbout": ["création site web artisan Nice", "agence web Côte d'Azur", "site internet artisan", "SEO local Nice Cannes Antibes"]
+    }]
+    </script>
 </head>
 <body>
 
@@ -1092,7 +1121,7 @@
                         <li><span class="price-check">&#10003;</span> Certificat SSL</li>
                         <li><span class="price-check">&#10003;</span> Livraison 5 jours</li>
                     </ul>
-                    <a href="#contact" class="btn-outline">Choisir</a>
+                    <a href="#contact?plan=essentiel" class="btn-outline" data-plan="essentiel">Choisir Essentiel</a>
                 </div>
 
                 <div class="price-card featured rv rv-d1">
@@ -1109,7 +1138,7 @@
                         <li><span class="price-check">&#10003;</span> Support 3 mois</li>
                         <li><span class="price-check">&#10003;</span> Livraison 7 jours</li>
                     </ul>
-                    <a href="#contact" class="btn-fill">Choisir</a>
+                    <a href="#contact?plan=professionnel" class="btn-fill" data-plan="professionnel">Choisir Professionnel</a>
                 </div>
 
                 <div class="price-card rv rv-d2">
@@ -1125,7 +1154,7 @@
                         <li><span class="price-check">&#10003;</span> Maintenance 1 an</li>
                         <li><span class="price-check">&#10003;</span> Support prioritaire 12 mois</li>
                     </ul>
-                    <a href="#contact" class="btn-outline">Choisir</a>
+                    <a href="#contact?plan=premium" class="btn-outline" data-plan="premium">Choisir Premium</a>
                 </div>
             </div>
         </div>
@@ -1264,6 +1293,25 @@
             entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
         }, { threshold: 0.15 });
         document.querySelectorAll('.rv').forEach(el => obs.observe(el));
+
+        // Plan pre-selection from pricing buttons
+        document.querySelectorAll('[data-plan]').forEach(function(btn) {
+            btn.addEventListener('click', function(e) {
+                var plan = btn.getAttribute('data-plan');
+                var map = { essentiel: 'Site Vitrine', professionnel: 'Site Vitrine', premium: 'Site Vitrine' };
+                var sel = document.getElementById('service');
+                if (sel) {
+                    for (var i = 0; i < sel.options.length; i++) {
+                        if (sel.options[i].text === map[plan]) { sel.selectedIndex = i; break; }
+                    }
+                }
+                var msg = document.getElementById('message');
+                if (msg) {
+                    var labels = { essentiel: 'Essentiel (490€)', professionnel: 'Professionnel (990€)', premium: 'Premium (1 990€)' };
+                    msg.value = 'Je suis intéressé par la formule ' + labels[plan] + '.';
+                }
+            });
+        });
 
         // Contact form — Formspree AJAX submit
         var contactForm = document.getElementById('contactForm');
