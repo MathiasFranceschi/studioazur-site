@@ -1,0 +1,870 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prévisualisez votre site | Studio Azur</title>
+    <meta name="description" content="Découvrez à quoi ressemblera votre site web professionnel en 30 secondes. Entrez vos informations et visualisez le résultat instantanément.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Libre+Franklin:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --linen: #FAF6F0;
+            --midnight: #0B1D3A;
+            --midnight-mid: #112847;
+            --terre: #C45D3E;
+            --terre-light: #D4785E;
+            --or: #D4A853;
+            --or-light: #E8C97A;
+            --azur: #2E86AB;
+            --azur-light: #4BA3C7;
+            --cream: #FDFAF6;
+            --text-body: #3A4A5A;
+            --text-muted: #7A8A9A;
+            --rule: rgba(11,29,58,0.08);
+        }
+
+        html { scroll-behavior: smooth; font-size: 16px; }
+
+        body {
+            font-family: 'Libre Franklin', sans-serif;
+            background: var(--linen);
+            color: var(--midnight);
+            line-height: 1.6;
+            min-height: 100vh;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 9999;
+            opacity: 0.015;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 300 300' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+            background-size: 200px;
+        }
+
+        h1, h2, h3 {
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            font-weight: 500;
+        }
+
+        /* ═══ NAV ═══ */
+        .topbar {
+            padding: 1.2rem 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid var(--rule);
+        }
+        .topbar-logo {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--midnight);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+        .topbar-dot {
+            width: 7px; height: 7px;
+            background: var(--terre);
+            border-radius: 50%;
+        }
+        .topbar-back {
+            font-size: 0.75rem;
+            font-weight: 500;
+            color: var(--text-muted);
+            text-decoration: none;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            transition: color 0.3s;
+        }
+        .topbar-back:hover { color: var(--midnight); }
+
+        /* ═══ STATES ═══ */
+        .app { position: relative; }
+
+        .state-form,
+        .state-loading,
+        .state-preview {
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+
+        .state-form.hidden,
+        .state-loading.hidden,
+        .state-preview.hidden {
+            opacity: 0;
+            pointer-events: none;
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            transform: translateY(10px);
+        }
+
+        .state-loading {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 60vh;
+            gap: 1.5rem;
+        }
+
+        /* ═══ FORM ═══ */
+        .form-section {
+            max-width: 560px;
+            margin: 0 auto;
+            padding: clamp(3rem, 8vw, 6rem) 2rem;
+            text-align: center;
+        }
+
+        .form-badge {
+            display: inline-block;
+            font-size: 0.62rem;
+            font-weight: 700;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--terre);
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+        .form-badge::before,
+        .form-badge::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            width: 24px;
+            height: 1px;
+            background: var(--terre);
+            opacity: 0.4;
+        }
+        .form-badge::before { right: calc(100% + 0.75rem); }
+        .form-badge::after { left: calc(100% + 0.75rem); }
+
+        .form-title {
+            font-size: clamp(2.2rem, 5vw, 3.2rem);
+            line-height: 1.1;
+            letter-spacing: -0.02em;
+            margin-bottom: 1rem;
+        }
+        .form-title em {
+            font-style: italic;
+            color: var(--terre);
+        }
+
+        .form-subtitle {
+            font-size: 1rem;
+            color: var(--text-body);
+            line-height: 1.75;
+            margin-bottom: 3rem;
+        }
+
+        .form-card {
+            background: var(--cream);
+            border: 1px solid var(--rule);
+            padding: 2.5rem 2rem;
+            text-align: left;
+            position: relative;
+        }
+        .form-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 2rem; right: 2rem;
+            height: 2px;
+            background: linear-gradient(90deg, var(--terre), var(--or));
+        }
+
+        .form-group { margin-bottom: 1.4rem; }
+        .form-group:last-of-type { margin-bottom: 0; }
+
+        .form-group label {
+            display: block;
+            font-size: 0.7rem;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            margin-bottom: 0.4rem;
+        }
+        .form-group label .opt {
+            font-weight: 400;
+            text-transform: none;
+            letter-spacing: 0;
+            opacity: 0.6;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 0.85rem 0;
+            font-family: 'Libre Franklin', sans-serif;
+            font-size: 0.95rem;
+            border: none;
+            border-bottom: 1px solid var(--rule);
+            background: transparent;
+            color: var(--midnight);
+            outline: none;
+            transition: border-color 0.3s;
+            border-radius: 0;
+            -webkit-appearance: none;
+        }
+        .form-group input:focus,
+        .form-group select:focus {
+            border-bottom-color: var(--terre);
+        }
+        .form-group input::placeholder {
+            color: rgba(11,29,58,0.2);
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+        }
+
+        .form-submit { margin-top: 2rem; }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.55rem;
+            font-family: 'Libre Franklin', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-decoration: none;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s;
+            letter-spacing: 0.02em;
+        }
+        .btn-primary {
+            background: var(--terre);
+            color: var(--cream);
+            padding: 1rem 2.2rem;
+            border-radius: 3px;
+            width: 100%;
+        }
+        .btn-primary:hover { background: var(--terre-light); }
+
+        /* ═══ LOADING ═══ */
+        .loading-text {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.5rem;
+            color: var(--midnight);
+            font-style: italic;
+        }
+        .loading-bar {
+            width: 200px;
+            height: 2px;
+            background: var(--rule);
+            border-radius: 2px;
+            overflow: hidden;
+            position: relative;
+        }
+        .loading-bar-fill {
+            position: absolute;
+            top: 0; left: 0;
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, var(--terre), var(--or));
+            border-radius: 2px;
+            animation: loadFill 1s ease forwards;
+        }
+        @keyframes loadFill {
+            0% { width: 0%; }
+            60% { width: 80%; }
+            100% { width: 100%; }
+        }
+
+        /* ═══ PREVIEW ═══ */
+        .preview-section {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 2rem 2rem 4rem;
+        }
+
+        .preview-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .preview-info {
+            font-size: 0.82rem;
+            color: var(--text-muted);
+        }
+        .preview-info strong {
+            color: var(--midnight);
+            font-weight: 600;
+        }
+
+        .variant-toggles {
+            display: flex;
+            gap: 0.35rem;
+            background: rgba(11,29,58,0.04);
+            padding: 4px;
+            border-radius: 4px;
+        }
+        .variant-btn {
+            font-family: 'Libre Franklin', sans-serif;
+            font-size: 0.72rem;
+            font-weight: 600;
+            letter-spacing: 0.03em;
+            padding: 0.5rem 1rem;
+            border: none;
+            background: none;
+            color: var(--text-muted);
+            cursor: pointer;
+            border-radius: 3px;
+            transition: all 0.25s;
+        }
+        .variant-btn.active {
+            background: var(--cream);
+            color: var(--midnight);
+            box-shadow: 0 1px 4px rgba(11,29,58,0.08);
+        }
+        .variant-btn:hover:not(.active) { color: var(--midnight); }
+
+        /* Browser mockup */
+        .browser-frame {
+            background: #1a1a1a;
+            border-radius: 10px 10px 6px 6px;
+            overflow: hidden;
+            box-shadow: 0 25px 60px rgba(11,29,58,0.12), 0 8px 20px rgba(11,29,58,0.06);
+        }
+        .browser-chrome {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 16px;
+            background: #2a2a2a;
+        }
+        .browser-dots { display: flex; gap: 6px; }
+        .browser-dots span { width: 10px; height: 10px; border-radius: 50%; }
+        .browser-dots span:nth-child(1) { background: #ff5f57; }
+        .browser-dots span:nth-child(2) { background: #ffbd2e; }
+        .browser-dots span:nth-child(3) { background: #28c840; }
+        .browser-url {
+            flex: 1;
+            background: rgba(255,255,255,0.08);
+            border-radius: 5px;
+            padding: 5px 12px;
+            font-size: 0.7rem;
+            color: rgba(255,255,255,0.5);
+            font-family: 'Libre Franklin', sans-serif;
+        }
+
+        .browser-content {
+            background: var(--cream);
+            min-height: 500px;
+            position: relative;
+        }
+
+        .watermark {
+            position: absolute;
+            bottom: 12px;
+            right: 12px;
+            font-size: 0.58rem;
+            font-weight: 600;
+            letter-spacing: 0.06em;
+            color: var(--text-muted);
+            opacity: 0.5;
+            z-index: 10;
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+        .watermark-dot {
+            width: 5px; height: 5px;
+            background: var(--terre);
+            border-radius: 50%;
+        }
+
+        /* ═══ PREVIEW INNER SITE ═══ */
+        .site { transition: opacity 0.3s ease; }
+
+        /* — Classique — */
+        .site.v-classique .site-hero {
+            background: var(--midnight);
+            color: var(--cream);
+            padding: clamp(2.5rem,5vw,4rem) clamp(1.5rem,3vw,3rem);
+            position: relative;
+        }
+        .site.v-classique .site-hero::after {
+            content: '';
+            position: absolute;
+            bottom: 0; left: clamp(1.5rem,3vw,3rem); right: clamp(1.5rem,3vw,3rem);
+            height: 2px;
+            background: var(--or);
+        }
+        .site.v-classique .site-hero-label {
+            font-size: 0.6rem; font-weight: 600; letter-spacing: 0.18em;
+            text-transform: uppercase; color: var(--or); margin-bottom: 1rem;
+        }
+        .site.v-classique .site-hero h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(1.6rem,3vw,2.4rem); font-weight: 500;
+            line-height: 1.15; margin-bottom: 0.6rem; letter-spacing: -0.01em;
+        }
+        .site.v-classique .site-hero-tagline {
+            font-size: 0.82rem; color: rgba(253,250,246,0.55);
+            margin-bottom: 1.5rem; line-height: 1.6;
+        }
+        .site.v-classique .site-cta-btn {
+            display: inline-block; background: var(--or); color: var(--midnight);
+            font-size: 0.75rem; font-weight: 600; padding: 0.65rem 1.5rem;
+            border-radius: 2px; text-decoration: none; letter-spacing: 0.02em;
+        }
+        .site.v-classique .site-services { padding: clamp(1.5rem,3vw,2.5rem) clamp(1.5rem,3vw,3rem); }
+        .site.v-classique .site-services-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.15rem; margin-bottom: 1rem; color: var(--midnight);
+        }
+        .site.v-classique .site-service-item {
+            padding: 0.7rem 0; border-bottom: 1px solid var(--rule);
+            font-size: 0.78rem; color: var(--text-body);
+            display: flex; align-items: center; gap: 0.5rem;
+        }
+        .site.v-classique .site-service-dot {
+            width: 5px; height: 5px; background: var(--or);
+            border-radius: 50%; flex-shrink: 0;
+        }
+        .site.v-classique .site-contact {
+            background: #f5f0e8;
+            padding: clamp(1.5rem,3vw,2.5rem) clamp(1.5rem,3vw,3rem);
+        }
+        .site.v-classique .site-contact-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.15rem; margin-bottom: 0.8rem;
+        }
+        .site.v-classique .site-contact-line {
+            font-size: 0.78rem; color: var(--text-body); margin-bottom: 0.3rem;
+        }
+
+        /* — Moderne — */
+        .site.v-moderne .site-hero {
+            background: var(--cream); color: var(--midnight);
+            padding: clamp(2.5rem,5vw,4rem) clamp(1.5rem,3vw,3rem);
+            border-bottom: 3px solid var(--azur);
+        }
+        .site.v-moderne .site-hero-label {
+            font-size: 0.6rem; font-weight: 600; letter-spacing: 0.18em;
+            text-transform: uppercase; color: var(--azur); margin-bottom: 1rem;
+        }
+        .site.v-moderne .site-hero h2 {
+            font-family: 'Libre Franklin', sans-serif;
+            font-size: clamp(1.5rem,2.8vw,2.2rem); font-weight: 700;
+            line-height: 1.15; margin-bottom: 0.6rem; letter-spacing: -0.02em;
+        }
+        .site.v-moderne .site-hero-tagline {
+            font-size: 0.82rem; color: var(--text-body);
+            margin-bottom: 1.5rem; line-height: 1.6;
+        }
+        .site.v-moderne .site-cta-btn {
+            display: inline-block; background: var(--terre); color: var(--cream);
+            font-size: 0.75rem; font-weight: 600; padding: 0.65rem 1.5rem;
+            border-radius: 100px; text-decoration: none;
+        }
+        .site.v-moderne .site-services {
+            padding: clamp(1.5rem,3vw,2.5rem) clamp(1.5rem,3vw,3rem);
+            background: #f8f9fa;
+        }
+        .site.v-moderne .site-services-title {
+            font-family: 'Libre Franklin', sans-serif;
+            font-size: 0.95rem; font-weight: 700; margin-bottom: 1rem;
+            text-transform: uppercase; letter-spacing: 0.05em; color: var(--midnight);
+        }
+        .site.v-moderne .site-service-item {
+            padding: 0.7rem 0; border-bottom: 1px solid rgba(0,0,0,0.05);
+            font-size: 0.78rem; color: var(--text-body);
+            display: flex; align-items: center; gap: 0.5rem;
+        }
+        .site.v-moderne .site-service-dot { display: none; }
+        .site.v-moderne .site-service-item::before {
+            content: '\2192'; color: var(--azur); font-size: 0.7rem;
+        }
+        .site.v-moderne .site-contact {
+            padding: clamp(1.5rem,3vw,2.5rem) clamp(1.5rem,3vw,3rem);
+        }
+        .site.v-moderne .site-contact-title {
+            font-family: 'Libre Franklin', sans-serif;
+            font-size: 0.95rem; font-weight: 700; margin-bottom: 0.8rem;
+        }
+        .site.v-moderne .site-contact-line {
+            font-size: 0.78rem; color: var(--text-body); margin-bottom: 0.3rem;
+        }
+
+        /* — Audacieux — */
+        .site.v-audacieux .site-hero {
+            background: var(--terre); color: var(--cream);
+            padding: clamp(3rem,6vw,5rem) clamp(1.5rem,3vw,3rem);
+            position: relative; overflow: hidden;
+        }
+        .site.v-audacieux .site-hero::before {
+            content: ''; position: absolute; top: -50%; right: -20%;
+            width: 300px; height: 300px;
+            border: 1px solid rgba(253,250,246,0.08);
+            border-radius: 50%; pointer-events: none;
+        }
+        .site.v-audacieux .site-hero-label {
+            font-size: 0.6rem; font-weight: 600; letter-spacing: 0.18em;
+            text-transform: uppercase; color: rgba(253,250,246,0.6); margin-bottom: 1rem;
+        }
+        .site.v-audacieux .site-hero h2 {
+            font-family: 'Libre Franklin', sans-serif;
+            font-size: clamp(1.8rem,3.5vw,2.8rem); font-weight: 700;
+            line-height: 1.05; margin-bottom: 0.6rem;
+            letter-spacing: -0.03em; text-transform: uppercase;
+        }
+        .site.v-audacieux .site-hero-tagline {
+            font-size: 0.82rem; color: rgba(253,250,246,0.6);
+            margin-bottom: 1.5rem; line-height: 1.6;
+        }
+        .site.v-audacieux .site-cta-btn {
+            display: inline-block; background: var(--cream); color: var(--terre);
+            font-size: 0.75rem; font-weight: 700; padding: 0.7rem 1.6rem;
+            border-radius: 2px; text-decoration: none;
+            text-transform: uppercase; letter-spacing: 0.06em;
+        }
+        .site.v-audacieux .site-services {
+            padding: clamp(1.5rem,3vw,2.5rem) clamp(1.5rem,3vw,3rem);
+            background: var(--midnight); color: var(--cream);
+        }
+        .site.v-audacieux .site-services-title {
+            font-family: 'Libre Franklin', sans-serif;
+            font-size: 0.85rem; font-weight: 700; margin-bottom: 1rem;
+            text-transform: uppercase; letter-spacing: 0.1em; color: var(--terre-light);
+        }
+        .site.v-audacieux .site-service-item {
+            padding: 0.7rem 0; border-bottom: 1px solid rgba(253,250,246,0.06);
+            font-size: 0.78rem; color: rgba(253,250,246,0.6);
+            display: flex; align-items: center; gap: 0.5rem;
+        }
+        .site.v-audacieux .site-service-dot {
+            width: 12px; height: 2px; background: var(--terre-light); flex-shrink: 0;
+        }
+        .site.v-audacieux .site-contact {
+            padding: clamp(1.5rem,3vw,2.5rem) clamp(1.5rem,3vw,3rem);
+            background: var(--cream);
+        }
+        .site.v-audacieux .site-contact-title {
+            font-family: 'Libre Franklin', sans-serif;
+            font-size: 0.95rem; font-weight: 700; margin-bottom: 0.8rem;
+            text-transform: uppercase; letter-spacing: 0.03em;
+        }
+        .site.v-audacieux .site-contact-line {
+            font-size: 0.78rem; color: var(--text-body); margin-bottom: 0.3rem;
+        }
+
+        /* ═══ CTA ═══ */
+        .cta-section {
+            text-align: center;
+            padding: 3rem 2rem;
+            max-width: 560px;
+            margin: 0 auto;
+        }
+        .cta-text {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.6rem;
+            line-height: 1.3;
+            margin-bottom: 1.5rem;
+        }
+        .cta-text em { font-style: italic; color: var(--terre); }
+        .cta-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+            align-items: center;
+        }
+        .cta-buttons .btn-primary { width: auto; padding: 1rem 2.5rem; }
+        .cta-back {
+            font-size: 0.78rem;
+            color: var(--text-muted);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        .cta-back:hover { color: var(--midnight); }
+
+        /* ═══ RESPONSIVE ═══ */
+        @media (max-width: 768px) {
+            .form-row { grid-template-columns: 1fr; gap: 0; }
+            .form-card { padding: 2rem 1.5rem; }
+            .browser-chrome { display: none; }
+            .browser-frame { border-radius: 6px; box-shadow: 0 12px 30px rgba(11,29,58,0.08); }
+            .preview-header { flex-direction: column; align-items: flex-start; }
+            .variant-toggles { width: 100%; justify-content: center; }
+        }
+        @media (max-width: 480px) {
+            .form-section { padding: 2rem 1.25rem; }
+            .form-title { font-size: 1.8rem; }
+            .variant-btn { padding: 0.45rem 0.7rem; font-size: 0.68rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="topbar">
+        <a href="index.html" class="topbar-logo"><span class="topbar-dot"></span> Studio Azur</a>
+        <a href="index.html" class="topbar-back">&larr; Retour au site</a>
+    </div>
+
+    <div class="app">
+        <!-- STATE: Form -->
+        <div class="state-form" id="stateForm">
+            <div class="form-section">
+                <div class="form-badge">Outil gratuit</div>
+                <h1 class="form-title">Votre site en <em>30 secondes</em></h1>
+                <p class="form-subtitle">Entrez vos informations et découvrez à quoi ressemblera votre site web professionnel.</p>
+                <div class="form-card">
+                    <form id="previewForm" autocomplete="off">
+                        <div class="form-group">
+                            <label for="bizName">Nom de votre entreprise</label>
+                            <input type="text" id="bizName" placeholder="ex : Dupont Couverture" required>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="bizTrade">Votre métier</label>
+                                <select id="bizTrade" required>
+                                    <option value="">Sélectionnez</option>
+                                    <option value="couvreur">Couvreur</option>
+                                    <option value="plombier">Plombier</option>
+                                    <option value="electricien">Électricien</option>
+                                    <option value="macon">Maçon</option>
+                                    <option value="peintre">Peintre</option>
+                                    <option value="chauffagiste">Chauffagiste</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="bizCity">Votre ville</label>
+                                <input type="text" id="bizCity" placeholder="ex : Nice" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="bizPhone">Téléphone <span class="opt">(optionnel)</span></label>
+                            <input type="tel" id="bizPhone" placeholder="06 12 34 56 78">
+                        </div>
+                        <div class="form-submit">
+                            <button type="submit" class="btn btn-primary">
+                                Voir mon site
+                                <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- STATE: Loading -->
+        <div class="state-loading hidden" id="stateLoading">
+            <div class="loading-text">Nous construisons votre site&hellip;</div>
+            <div class="loading-bar"><div class="loading-bar-fill" id="loadingFill"></div></div>
+        </div>
+
+        <!-- STATE: Preview -->
+        <div class="state-preview hidden" id="statePreview">
+            <div class="preview-section">
+                <div class="preview-header">
+                    <div class="preview-info">Aperçu pour <strong id="previewLabel"></strong></div>
+                    <div class="variant-toggles">
+                        <button class="variant-btn active" data-variant="classique">Classique</button>
+                        <button class="variant-btn" data-variant="moderne">Moderne</button>
+                        <button class="variant-btn" data-variant="audacieux">Audacieux</button>
+                    </div>
+                </div>
+
+                <div class="browser-frame">
+                    <div class="browser-chrome">
+                        <div class="browser-dots"><span></span><span></span><span></span></div>
+                        <div class="browser-url">
+                            <span style="opacity:0.6">&#128274;</span>
+                            <span id="browserUrl"></span>
+                        </div>
+                    </div>
+                    <div class="browser-content">
+                        <div class="site v-classique" id="sitePreview">
+                            <!-- Hero -->
+                            <div class="site-hero">
+                                <div class="site-hero-label" id="siteLabel"></div>
+                                <h2 id="siteHeading"></h2>
+                                <div class="site-hero-tagline" id="siteTagline"></div>
+                                <a href="#" class="site-cta-btn" onclick="return false">Demander un devis gratuit</a>
+                            </div>
+                            <!-- Services -->
+                            <div class="site-services">
+                                <div class="site-services-title">Nos services</div>
+                                <div id="siteServices"></div>
+                            </div>
+                            <!-- Contact -->
+                            <div class="site-contact">
+                                <div class="site-contact-title">Contactez-nous</div>
+                                <div class="site-contact-line" id="siteLocation"></div>
+                                <div class="site-contact-line" id="sitePhone"></div>
+                                <div class="site-contact-line" style="margin-top:0.5rem;font-size:0.72rem;color:var(--text-muted);">Devis gratuit sous 24h</div>
+                            </div>
+                        </div>
+                        <div class="watermark"><span class="watermark-dot"></span> Propulsé par Studio Azur</div>
+                    </div>
+                </div>
+
+                <div class="cta-section">
+                    <div class="cta-text">Ce site vous plaît ?<br>On peut le <em>créer pour vous.</em></div>
+                    <div class="cta-buttons">
+                        <a href="#" id="ctaLink" class="btn btn-primary">
+                            Je veux ce site — Demander un devis
+                            <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                        </a>
+                        <a href="#" class="cta-back" id="ctaBack">&larr; Modifier mes informations</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const TRADES = {
+            couvreur: {
+                label: 'Couvreur',
+                tagline: 'Toiture, réparation, isolation et étanchéité',
+                services: ['Réfection de toiture', 'Isolation thermique', 'Traitement de charpente', 'Zinguerie']
+            },
+            plombier: {
+                label: 'Plombier',
+                tagline: 'Plomberie, chauffage et dépannage d\'urgence',
+                services: ['Dépannage urgent', 'Installation sanitaire', 'Chauffe-eau et chaudière', 'Débouchage']
+            },
+            electricien: {
+                label: 'Électricien',
+                tagline: 'Installation, mise aux normes et dépannage électrique',
+                services: ['Mise aux normes NF C 15-100', 'Installation électrique', 'Dépannage rapide', 'Domotique']
+            },
+            macon: {
+                label: 'Maçon',
+                tagline: 'Construction, rénovation et maçonnerie traditionnelle',
+                services: ['Construction neuve', 'Rénovation complète', 'Extension et surélévation', 'Ravalement de façade']
+            },
+            peintre: {
+                label: 'Peintre',
+                tagline: 'Peinture intérieure, extérieure et décoration',
+                services: ['Peinture intérieure', 'Ravalement extérieur', 'Pose de revêtements', 'Décoration murale']
+            },
+            chauffagiste: {
+                label: 'Chauffagiste',
+                tagline: 'Installation, entretien et dépannage de chauffage',
+                services: ['Installation chaudière', 'Entretien annuel', 'Pompe à chaleur', 'Plancher chauffant']
+            }
+        };
+
+        const stateForm = document.getElementById('stateForm');
+        const stateLoading = document.getElementById('stateLoading');
+        const statePreview = document.getElementById('statePreview');
+        const form = document.getElementById('previewForm');
+
+        function showState(state) {
+            [stateForm, stateLoading, statePreview].forEach(function(s) { s.classList.add('hidden'); });
+            state.classList.remove('hidden');
+        }
+
+        function slugify(str) {
+            return str.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+                .replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+        }
+
+        function buildServiceItems(services) {
+            var container = document.getElementById('siteServices');
+            // Clear existing children safely
+            while (container.firstChild) { container.removeChild(container.firstChild); }
+            services.forEach(function(name) {
+                var item = document.createElement('div');
+                item.className = 'site-service-item';
+                var dot = document.createElement('span');
+                dot.className = 'site-service-dot';
+                item.appendChild(dot);
+                var text = document.createTextNode(name);
+                item.appendChild(text);
+                container.appendChild(item);
+            });
+        }
+
+        function generatePreview(data) {
+            var trade = TRADES[data.trade];
+
+            document.getElementById('previewLabel').textContent = data.name;
+            document.getElementById('browserUrl').textContent = slugify(data.name) + '.studioazur.dev';
+            document.getElementById('siteLabel').textContent = trade.label + ' à ' + data.city;
+            document.getElementById('siteHeading').textContent = data.name;
+            document.getElementById('siteTagline').textContent = trade.tagline;
+            document.getElementById('siteLocation').textContent = '\uD83D\uDCCD ' + data.city + ', Côte d\'Azur';
+
+            var phoneEl = document.getElementById('sitePhone');
+            if (data.phone) {
+                phoneEl.textContent = '\uD83D\uDCDE ' + data.phone;
+                phoneEl.style.display = 'block';
+            } else {
+                phoneEl.textContent = '';
+                phoneEl.style.display = 'none';
+            }
+
+            buildServiceItems(trade.services);
+
+            var params = new URLSearchParams({ name: data.name, activity: data.trade, city: data.city });
+            document.getElementById('ctaLink').href = 'index.html#contact?' + params.toString();
+        }
+
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            var data = {
+                name: document.getElementById('bizName').value.trim(),
+                trade: document.getElementById('bizTrade').value,
+                city: document.getElementById('bizCity').value.trim(),
+                phone: document.getElementById('bizPhone').value.trim()
+            };
+            if (!data.name || !data.trade || !data.city) return;
+
+            showState(stateLoading);
+
+            // Reset loading animation
+            var bar = document.getElementById('loadingFill');
+            bar.style.animation = 'none';
+            bar.offsetHeight;
+            bar.style.animation = 'loadFill 1s ease forwards';
+
+            setTimeout(function() {
+                generatePreview(data);
+                showState(statePreview);
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }, 1050);
+        });
+
+        // Variant switching
+        document.querySelectorAll('.variant-btn').forEach(function(btn) {
+            btn.addEventListener('click', function() {
+                document.querySelectorAll('.variant-btn').forEach(function(b) { b.classList.remove('active'); });
+                btn.classList.add('active');
+                var site = document.getElementById('sitePreview');
+                site.style.opacity = '0';
+                var variant = btn.getAttribute('data-variant');
+                setTimeout(function() {
+                    site.className = 'site v-' + variant;
+                    site.style.opacity = '1';
+                }, 200);
+            });
+        });
+
+        document.getElementById('ctaBack').addEventListener('click', function(e) {
+            e.preventDefault();
+            showState(stateForm);
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    </script>
+</body>
+</html>
