@@ -29,12 +29,14 @@
             --terracotta-light: #D4785E;
             --azur: #2E86AB;
             --azur-light: #4BA3C7;
+            --gold: #D4A853;
+            --gold-light: #E8C97A;
             --text-dark: #0B1D3A;
             --text-body: #3A4A5A;
             --text-muted: #6B7A8A;
-            --text-light: rgba(253, 250, 246, 0.65);
-            --rule: rgba(11, 29, 58, 0.1);
-            --rule-light: rgba(253, 250, 246, 0.1);
+            --text-light: rgba(253,250,246,0.65);
+            --rule: rgba(11,29,58,0.1);
+            --rule-light: rgba(253,250,246,0.1);
         }
 
         html { scroll-behavior: smooth; font-size: 16px; }
@@ -55,8 +57,8 @@
             inset: 0;
             pointer-events: none;
             z-index: 9999;
-            opacity: 0.018;
-            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 300 300' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+            opacity: 0.02;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 300 300' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
             background-size: 200px;
         }
 
@@ -66,23 +68,29 @@
         }
 
         .wrap { width: 100%; max-width: 1280px; margin: 0 auto; padding: 0 clamp(1.5rem, 4vw, 3.5rem); }
-        .wrap-narrow { max-width: 1080px; }
 
-        /* ═══ EDITORIAL LABELS ═══ */
         .label {
             font-family: 'Outfit', sans-serif;
             font-size: 0.68rem;
             font-weight: 600;
             letter-spacing: 0.22em;
             text-transform: uppercase;
-            display: inline-block;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.6rem;
+        }
+        .label::before {
+            content: '';
+            width: 24px;
+            height: 1.5px;
+            background: currentColor;
         }
 
-        /* ═══ REVEAL SYSTEM ═══ */
+        /* ═══ REVEALS ═══ */
         .r {
             opacity: 0;
-            transform: translateY(32px);
-            transition: opacity 0.8s cubic-bezier(0.25, 1, 0.5, 1), transform 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+            transform: translateY(28px);
+            transition: opacity 0.8s cubic-bezier(0.25,1,0.5,1), transform 0.8s cubic-bezier(0.25,1,0.5,1);
         }
         .r.v { opacity: 1; transform: none; }
         .r-1 { transition-delay: 0.08s; }
@@ -91,80 +99,61 @@
         .r-4 { transition-delay: 0.32s; }
         .r-5 { transition-delay: 0.40s; }
 
-        /* Horizontal line reveal */
-        .rule-reveal {
+        .rule-anim {
             transform: scaleX(0);
             transform-origin: left;
-            transition: transform 1s cubic-bezier(0.25, 1, 0.5, 1);
+            transition: transform 0.9s cubic-bezier(0.25,1,0.5,1);
         }
-        .rule-reveal.v { transform: scaleX(1); }
+        .rule-anim.v { transform: scaleX(1); }
 
-        /* ═══ NAVIGATION ═══ */
+        /* ═══ SVG LOGO ═══ */
+        .logo-svg { height: 32px; width: auto; display: block; }
+        .logo-svg .logo-wave { fill: var(--azur); }
+        .logo-svg .logo-sun { fill: var(--gold); }
+        .logo-svg .logo-text { fill: currentColor; font-family: 'DM Serif Display', serif; }
+        .logo-large .logo-svg { height: 44px; }
+
+        /* ═══ NAV ═══ */
         nav {
             position: fixed;
             top: 0; left: 0; right: 0;
             z-index: 100;
-            padding: 1.5rem 0;
+            padding: 1.4rem 0;
             transition: all 0.4s;
-            mix-blend-mode: normal;
         }
         nav.scrolled {
-            background: var(--sand-light);
-            padding: 1rem 0;
+            background: rgba(253,250,246,0.95);
+            backdrop-filter: blur(12px);
+            padding: 0.9rem 0;
             box-shadow: 0 1px 0 var(--rule);
-            mix-blend-mode: normal;
         }
-        /* When over hero (dark bg), nav text is light */
-        nav:not(.scrolled) .nav-logo { color: var(--sand-light); }
-        nav:not(.scrolled) .nav-links a { color: rgba(253,250,246,0.6); }
-        nav:not(.scrolled) .nav-links a:hover { color: var(--sand-light); }
-        nav:not(.scrolled) .nav-toggle span { background: var(--sand-light); }
+        nav:not(.scrolled) { color: var(--sand-light); }
+        nav.scrolled { color: var(--ocean); }
+        nav:not(.scrolled) .logo-svg .logo-text { fill: var(--sand-light); }
+        nav.scrolled .logo-svg .logo-text { fill: var(--ocean); }
 
-        nav.scrolled .nav-logo { color: var(--ocean); }
-        nav.scrolled .nav-links a { color: var(--text-muted); }
-        nav.scrolled .nav-links a:hover { color: var(--ocean); }
-        nav.scrolled .nav-toggle span { background: var(--ocean); }
+        nav .wrap { display: flex; align-items: center; justify-content: space-between; }
 
-        nav .wrap {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-
-        .nav-logo {
-            font-family: 'DM Serif Display', serif;
-            font-size: 1.35rem;
-            text-decoration: none;
-            letter-spacing: -0.02em;
-            transition: color 0.4s;
-        }
-        .nav-logo-dot {
-            display: inline-block;
-            width: 8px;
-            height: 8px;
-            background: var(--terracotta);
-            border-radius: 50%;
-            margin-right: 0.4rem;
-            vertical-align: middle;
-            position: relative;
-            top: -1px;
-        }
+        .nav-home { text-decoration: none; }
 
         .nav-links {
             display: flex;
             align-items: center;
-            gap: 2.5rem;
+            gap: 2.4rem;
             list-style: none;
         }
         .nav-links a {
             font-size: 0.75rem;
             font-weight: 500;
-            letter-spacing: 0.08em;
+            letter-spacing: 0.07em;
             text-transform: uppercase;
             text-decoration: none;
-            transition: color 0.3s;
+            color: inherit;
+            opacity: 0.6;
+            transition: opacity 0.3s;
             position: relative;
         }
+        .nav-links a:hover { opacity: 1; }
         .nav-links a::after {
             content: '';
             position: absolute;
@@ -173,13 +162,14 @@
             background: var(--terracotta);
             transform: scaleX(0);
             transform-origin: left;
-            transition: transform 0.35s cubic-bezier(0.25, 1, 0.5, 1);
+            transition: transform 0.35s cubic-bezier(0.25,1,0.5,1);
         }
         .nav-links a:hover::after { transform: scaleX(1); }
 
         .nav-cta {
             background: var(--terracotta) !important;
             color: var(--sand-light) !important;
+            opacity: 1 !important;
             padding: 0.55rem 1.3rem !important;
             border-radius: 3px;
             font-weight: 600 !important;
@@ -201,7 +191,7 @@
         }
         .nav-toggle span {
             width: 22px; height: 1.5px;
-            border-radius: 0;
+            background: currentColor;
             transition: 0.3s;
         }
 
@@ -210,113 +200,89 @@
             min-height: 100vh;
             background: var(--ocean);
             display: flex;
-            align-items: flex-end;
+            align-items: center;
             position: relative;
             overflow: hidden;
-            padding-top: 6rem;
+            padding: 7rem 0 0;
         }
 
-        /* Geometric color block — terracotta accent */
-        .hero-block {
+        /* Hero Mediterranean illustration */
+        .hero-illustration {
             position: absolute;
-            top: 0; right: 0;
-            width: 38%;
+            bottom: 0; right: 0;
+            width: 55%;
             height: 100%;
-            background: var(--ocean-mid);
-            z-index: 0;
-        }
-        .hero-block::after {
-            content: '';
-            position: absolute;
-            bottom: 0; left: 0;
-            width: 4px;
-            height: 40%;
-            background: var(--terracotta);
-        }
-
-        /* Decorative large serif letter */
-        .hero-deco {
-            position: absolute;
-            top: 12%;
-            right: 6%;
-            font-family: 'DM Serif Display', serif;
-            font-size: clamp(15rem, 22vw, 28rem);
-            color: rgba(253, 250, 246, 0.02);
-            line-height: 0.8;
-            z-index: 0;
             pointer-events: none;
-            user-select: none;
+            z-index: 0;
         }
 
         .hero .wrap {
             position: relative;
             z-index: 1;
-            padding-bottom: clamp(4rem, 8vh, 7rem);
-            padding-top: clamp(4rem, 12vh, 10rem);
+            padding-bottom: 6rem;
         }
 
         .hero-grid {
             display: grid;
-            grid-template-columns: 1fr 420px;
+            grid-template-columns: 1fr 380px;
             gap: 4rem;
             align-items: end;
         }
 
         .hero-eyebrow {
-            color: var(--terracotta-light);
+            color: var(--gold);
             margin-bottom: 2rem;
             opacity: 0;
-            animation: heroReveal 0.7s ease forwards 0.2s;
-        }
-        .hero-eyebrow::before {
-            content: '—';
-            margin-right: 0.5em;
-            color: var(--terracotta);
+            animation: fadeUp 0.7s ease forwards 0.2s;
         }
 
-        @keyframes heroReveal {
+        @keyframes fadeUp {
             from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: none; }
         }
+        @keyframes drawLine {
+            from { stroke-dashoffset: 1; }
+            to { stroke-dashoffset: 0; }
+        }
 
         .hero h1 {
-            font-size: clamp(2.8rem, 5.2vw, 4.4rem);
+            font-size: clamp(2.6rem, 5vw, 4.2rem);
             color: var(--sand-light);
             line-height: 1.08;
             letter-spacing: -0.03em;
             margin-bottom: 2rem;
-            max-width: 700px;
+            max-width: 660px;
             opacity: 0;
-            animation: heroReveal 0.9s ease forwards 0.35s;
+            animation: fadeUp 0.9s ease forwards 0.35s;
         }
         .hero h1 em {
             font-style: italic;
-            color: var(--terracotta-light);
+            color: var(--gold);
         }
 
         .hero-desc {
             font-size: 1.05rem;
             color: var(--text-light);
-            max-width: 500px;
+            max-width: 480px;
             line-height: 1.85;
             margin-bottom: 2.5rem;
             opacity: 0;
-            animation: heroReveal 0.9s ease forwards 0.5s;
+            animation: fadeUp 0.9s ease forwards 0.5s;
         }
 
         .hero-buttons {
             display: flex;
-            gap: 1.25rem;
+            gap: 1.5rem;
             align-items: center;
             flex-wrap: wrap;
             opacity: 0;
-            animation: heroReveal 0.9s ease forwards 0.65s;
+            animation: fadeUp 0.9s ease forwards 0.65s;
         }
 
         .btn {
             display: inline-flex;
             align-items: center;
-            gap: 0.6rem;
+            gap: 0.55rem;
             font-family: 'Outfit', sans-serif;
             font-size: 0.85rem;
             font-weight: 600;
@@ -332,9 +298,7 @@
             padding: 0.95rem 2rem;
             border-radius: 3px;
         }
-        .btn-primary:hover {
-            background: var(--terracotta-light);
-        }
+        .btn-primary:hover { background: var(--terracotta-light); }
         .btn-ghost {
             background: none;
             color: var(--sand-light);
@@ -351,22 +315,20 @@
         }
         .btn-dark:hover { background: var(--ocean-mid); }
 
-        /* Hero sidebar — stats composition */
+        /* Hero stats sidebar */
         .hero-aside {
             opacity: 0;
-            animation: heroReveal 1s ease forwards 0.7s;
+            animation: fadeUp 1s ease forwards 0.7s;
         }
         .hero-aside-inner {
             border-left: 1px solid var(--rule-light);
             padding-left: 2.5rem;
         }
-        .hero-stat {
-            margin-bottom: 2.5rem;
-        }
+        .hero-stat { margin-bottom: 2.5rem; }
         .hero-stat:last-child { margin-bottom: 0; }
         .hero-stat-num {
             font-family: 'DM Serif Display', serif;
-            font-size: 3.5rem;
+            font-size: 3.2rem;
             color: var(--sand-light);
             line-height: 1;
             letter-spacing: -0.03em;
@@ -377,14 +339,18 @@
             letter-spacing: 0.12em;
             text-transform: uppercase;
             color: var(--text-light);
-            margin-top: 0.3rem;
+            margin-top: 0.25rem;
         }
-        .hero-stat-rule {
-            width: 40px;
-            height: 1.5px;
-            background: var(--terracotta);
+        .hero-stat-accent {
+            width: 32px;
+            height: 2px;
+            background: var(--gold);
             margin-top: 1.5rem;
         }
+
+        /* ═══ WAVE DIVIDER ═══ */
+        .wave-divider { display: block; width: 100%; line-height: 0; margin-top: -1px; }
+        .wave-divider svg { width: 100%; height: auto; display: block; }
 
         /* ═══ TRUST BAR ═══ */
         .trust {
@@ -400,23 +366,21 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 0.65rem;
-            padding: 1.5rem 1rem;
+            gap: 0.6rem;
+            padding: 1.4rem 0.75rem;
             font-size: 0.78rem;
             font-weight: 500;
             color: var(--text-muted);
-            letter-spacing: 0.02em;
             border-right: 1px solid var(--rule);
             transition: color 0.3s;
+            text-align: center;
         }
         .trust-item:last-child { border-right: none; }
-        .trust-item:first-child { border-left: none; }
         .trust-item:hover { color: var(--ocean); }
-        .trust-emoji { font-size: 1rem; }
 
         /* ═══ SERVICES ═══ */
         .services {
-            padding: clamp(5rem, 10vw, 9rem) 0;
+            padding: clamp(5rem,10vw,9rem) 0;
             background: var(--sand-light);
         }
 
@@ -425,81 +389,66 @@
             justify-content: space-between;
             align-items: flex-end;
             margin-bottom: 1rem;
+            gap: 2rem;
         }
         .services-label { color: var(--terracotta); }
         .services-rule {
             height: 1px;
             background: var(--rule);
-            margin-bottom: clamp(3rem, 5vw, 4.5rem);
+            margin-bottom: clamp(3rem,5vw,4.5rem);
         }
-
         .services-title {
-            font-size: clamp(2rem, 3.5vw, 3rem);
+            font-size: clamp(2rem,3.5vw,3rem);
             line-height: 1.1;
             letter-spacing: -0.02em;
-            max-width: 500px;
+            max-width: 480px;
         }
         .services-intro {
             font-size: 0.95rem;
             color: var(--text-body);
-            max-width: 380px;
+            max-width: 360px;
             line-height: 1.8;
             text-align: right;
         }
 
-        /* Staggered service items — editorial layout */
-        .service-items {
+        /* Main 3 services — staggered */
+        .service-grid-main {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 0;
         }
-
         .service-item {
-            padding: clamp(2rem, 4vw, 3.5rem);
+            padding: clamp(2rem,4vw,3rem);
             border-top: 1px solid var(--rule);
             position: relative;
-            transition: background 0.4s;
+            transition: background 0.35s;
         }
         .service-item:hover { background: var(--sand); }
-
-        /* Stagger: first item spans left, second right with offset, third left */
         .service-item:nth-child(1) { grid-column: 1; }
-        .service-item:nth-child(2) { grid-column: 2; border-left: 1px solid var(--rule); padding-top: clamp(4rem, 7vw, 6rem); }
+        .service-item:nth-child(2) { grid-column: 2; border-left: 1px solid var(--rule); padding-top: clamp(4rem,7vw,6rem); }
         .service-item:nth-child(3) { grid-column: 1; grid-row: 2; }
 
-        .service-num {
-            font-family: 'DM Serif Display', serif;
-            font-size: clamp(4rem, 6vw, 5.5rem);
-            color: var(--ocean);
-            opacity: 0.06;
-            line-height: 1;
-            letter-spacing: -0.04em;
-            margin-bottom: 1rem;
-            position: absolute;
-            top: clamp(1.5rem, 3vw, 2.5rem);
-            right: clamp(1.5rem, 3vw, 2.5rem);
-        }
+        .service-icon { margin-bottom: 1.25rem; }
+        .service-icon svg { width: 48px; height: 48px; }
 
         .service-item h3 {
-            font-size: 1.5rem;
+            font-size: 1.4rem;
             color: var(--ocean);
-            margin-bottom: 0.8rem;
+            margin-bottom: 0.7rem;
             line-height: 1.2;
         }
-
-        .service-item p {
+        .service-item > p {
             font-size: 0.9rem;
             color: var(--text-body);
             line-height: 1.8;
-            margin-bottom: 1.5rem;
+            margin-bottom: 1.3rem;
             max-width: 400px;
         }
-
         .service-features {
             list-style: none;
             display: flex;
             flex-direction: column;
-            gap: 0.4rem;
+            gap: 0.35rem;
         }
         .service-features li {
             font-size: 0.8rem;
@@ -513,31 +462,79 @@
             left: 0;
             top: 0.55em;
             width: 4px;
-            height: 1px;
+            height: 1.5px;
             background: var(--terracotta);
         }
 
-        /* ═══ WHY SECTION ═══ */
+        /* Coming soon services */
+        .services-soon-label {
+            margin-top: clamp(3rem,5vw,4.5rem);
+            margin-bottom: 1rem;
+            color: var(--gold);
+        }
+        .services-soon-rule {
+            height: 1px;
+            background: var(--rule);
+            margin-bottom: clamp(2rem,3vw,3rem);
+        }
+
+        .service-grid-soon {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0;
+        }
+        .service-soon {
+            padding: clamp(2rem,3.5vw,3rem);
+            border-top: 1px solid var(--rule);
+            position: relative;
+            transition: background 0.35s;
+        }
+        .service-soon:nth-child(2) { border-left: 1px solid var(--rule); }
+        .service-soon:hover { background: var(--sand); }
+
+        .soon-badge {
+            display: inline-block;
+            font-size: 0.62rem;
+            font-weight: 700;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--sand-light);
+            background: var(--gold);
+            padding: 0.2rem 0.7rem;
+            border-radius: 2px;
+            margin-bottom: 1rem;
+        }
+
+        .service-soon h3 {
+            font-size: 1.4rem;
+            color: var(--ocean);
+            margin-bottom: 0.7rem;
+            line-height: 1.2;
+        }
+        .service-soon > p {
+            font-size: 0.9rem;
+            color: var(--text-body);
+            line-height: 1.8;
+            margin-bottom: 1.3rem;
+            max-width: 400px;
+        }
+
+        /* ═══ WHY ═══ */
         .why {
-            padding: clamp(5rem, 10vw, 9rem) 0;
+            padding: clamp(5rem,10vw,9rem) 0;
             background: var(--ocean);
             position: relative;
             overflow: hidden;
         }
 
-        /* Giant pull-quote in background */
-        .why-quote-bg {
+        /* Decorative provençal arch */
+        .why-arch {
             position: absolute;
             top: 50%;
-            left: -3%;
+            right: -80px;
             transform: translateY(-50%);
-            font-family: 'DM Serif Display', serif;
-            font-size: clamp(8rem, 15vw, 16rem);
-            color: rgba(253, 250, 246, 0.015);
-            line-height: 0.85;
-            white-space: nowrap;
+            opacity: 0.04;
             pointer-events: none;
-            user-select: none;
         }
 
         .why-top {
@@ -545,15 +542,18 @@
             justify-content: space-between;
             align-items: flex-end;
             margin-bottom: 1rem;
+            gap: 2rem;
+            position: relative;
+            z-index: 1;
         }
         .why-label { color: var(--azur-light); }
         .why-rule {
             height: 1px;
             background: var(--rule-light);
-            margin-bottom: clamp(3rem, 5vw, 4.5rem);
+            margin-bottom: clamp(3rem,5vw,4.5rem);
         }
         .why-title {
-            font-size: clamp(2rem, 3.5vw, 3rem);
+            font-size: clamp(2rem,3.5vw,3rem);
             color: var(--sand-light);
             line-height: 1.1;
             letter-spacing: -0.02em;
@@ -562,7 +562,7 @@
         .why-intro {
             font-size: 0.95rem;
             color: var(--text-light);
-            max-width: 380px;
+            max-width: 360px;
             line-height: 1.8;
             text-align: right;
         }
@@ -574,36 +574,34 @@
             position: relative;
             z-index: 1;
         }
-
         .why-item {
-            padding: clamp(2rem, 3.5vw, 3rem);
+            padding: clamp(2rem,3.5vw,3rem);
             border-top: 1px solid var(--rule-light);
             display: grid;
-            grid-template-columns: 56px 1fr;
-            gap: 1.5rem;
+            grid-template-columns: 52px 1fr;
+            gap: 1.35rem;
             align-items: start;
-            transition: background 0.35s;
+            transition: background 0.3s;
         }
         .why-item:nth-child(even) { border-left: 1px solid var(--rule-light); }
-        .why-item:hover { background: rgba(253, 250, 246, 0.02); }
+        .why-item:hover { background: rgba(253,250,246,0.02); }
 
         .why-num {
             font-family: 'DM Serif Display', serif;
-            font-size: 1.35rem;
+            font-size: 1.2rem;
             color: var(--terracotta-light);
-            width: 56px;
-            height: 56px;
+            width: 52px;
+            height: 52px;
             display: flex;
             align-items: center;
             justify-content: center;
-            border: 1px solid rgba(196, 93, 62, 0.2);
+            border: 1px solid rgba(196,93,62,0.2);
             border-radius: 2px;
         }
-
         .why-item h4 {
             font-size: 1.15rem;
             color: var(--sand-light);
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.45rem;
             line-height: 1.25;
         }
         .why-item p {
@@ -614,17 +612,16 @@
 
         /* ═══ PRICING ═══ */
         .pricing {
-            padding: clamp(5rem, 10vw, 9rem) 0;
+            padding: clamp(5rem,10vw,9rem) 0;
             background: var(--sand);
         }
-
         .pricing-top {
             text-align: center;
             margin-bottom: 1rem;
         }
-        .pricing-label { color: var(--terracotta); }
+        .pricing-label { color: var(--terracotta); justify-content: center; }
         .pricing-title {
-            font-size: clamp(2rem, 3.5vw, 3rem);
+            font-size: clamp(2rem,3.5vw,3rem);
             line-height: 1.1;
             letter-spacing: -0.02em;
             margin-top: 1rem;
@@ -632,38 +629,33 @@
         .pricing-subtitle {
             font-size: 0.95rem;
             color: var(--text-body);
-            margin-top: 0.8rem;
+            margin: 0.8rem auto 0;
             max-width: 480px;
-            margin-left: auto;
-            margin-right: auto;
             line-height: 1.7;
         }
         .pricing-rule {
             height: 1px;
             background: var(--rule);
-            margin: clamp(2.5rem, 4vw, 4rem) 0;
+            margin: clamp(2.5rem,4vw,4rem) 0;
         }
 
-        /* Rate-card style table */
         .pricing-cards {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             max-width: 1050px;
             margin: 0 auto;
         }
-
         .pricing-card {
             padding: 2.5rem 2rem;
             border-right: 1px solid var(--rule);
             display: flex;
             flex-direction: column;
             position: relative;
-            transition: background 0.35s;
+            transition: background 0.3s;
         }
         .pricing-card:last-child { border-right: none; }
         .pricing-card:hover { background: var(--sand-light); }
 
-        /* Featured: terracotta top band */
         .pricing-card.featured {
             background: var(--ocean);
             border-right: 1px solid var(--rule-light);
@@ -677,38 +669,34 @@
             height: 4px;
             background: var(--terracotta);
         }
-
         .pricing-badge {
             position: absolute;
             top: 12px;
             right: 1.5rem;
-            font-size: 0.62rem;
+            font-size: 0.6rem;
             font-weight: 700;
             letter-spacing: 0.15em;
             text-transform: uppercase;
             color: var(--terracotta-light);
         }
-
         .pricing-name {
             font-size: 0.68rem;
             font-weight: 600;
             letter-spacing: 0.2em;
             text-transform: uppercase;
             color: var(--text-muted);
-            margin-bottom: 1.25rem;
+            margin-bottom: 1.2rem;
         }
         .pricing-card.featured .pricing-name { color: var(--azur-light); }
-
         .pricing-price {
             font-family: 'DM Serif Display', serif;
-            font-size: clamp(2.5rem, 3.5vw, 3.2rem);
+            font-size: clamp(2.5rem,3.5vw,3.2rem);
             line-height: 1;
             color: var(--ocean);
             margin-bottom: 0.4rem;
             letter-spacing: -0.02em;
         }
         .pricing-card.featured .pricing-price { color: var(--sand-light); }
-
         .pricing-note {
             font-size: 0.82rem;
             color: var(--text-muted);
@@ -716,16 +704,12 @@
             margin-bottom: 1.75rem;
             border-bottom: 1px solid var(--rule);
         }
-        .pricing-card.featured .pricing-note {
-            color: var(--text-light);
-            border-bottom-color: var(--rule-light);
-        }
-
+        .pricing-card.featured .pricing-note { color: var(--text-light); border-color: var(--rule-light); }
         .pricing-features {
             list-style: none;
             display: flex;
             flex-direction: column;
-            gap: 0.65rem;
+            gap: 0.6rem;
             margin-bottom: 2.5rem;
             flex: 1;
         }
@@ -734,11 +718,10 @@
             color: var(--text-body);
             display: flex;
             align-items: baseline;
-            gap: 0.6rem;
+            gap: 0.55rem;
             line-height: 1.5;
         }
         .pricing-card.featured .pricing-features li { color: var(--text-light); }
-
         .pricing-check {
             color: var(--azur);
             font-size: 0.7rem;
@@ -746,44 +729,28 @@
             font-weight: 700;
         }
         .pricing-card.featured .pricing-check { color: var(--azur-light); }
-
-        .pricing-card .btn {
-            width: 100%;
-            justify-content: center;
-            text-align: center;
-        }
-        .pricing-card.featured .btn {
-            background: var(--terracotta);
-            color: var(--sand-light);
-            padding: 0.95rem 2rem;
-            border-radius: 3px;
-        }
-        .pricing-card.featured .btn:hover { background: var(--terracotta-light); }
+        .pricing-card .btn { width: 100%; justify-content: center; }
 
         /* ═══ CONTACT ═══ */
         .contact {
-            padding: clamp(5rem, 10vw, 9rem) 0;
+            padding: clamp(5rem,10vw,9rem) 0;
             background: var(--sand-light);
+            position: relative;
         }
-
-        .contact-top {
-            margin-bottom: 1rem;
-        }
+        .contact-top { margin-bottom: 1rem; }
         .contact-label { color: var(--terracotta); }
         .contact-rule {
             height: 1px;
             background: var(--rule);
-            margin-bottom: clamp(3rem, 5vw, 4.5rem);
+            margin-bottom: clamp(3rem,5vw,4.5rem);
         }
-
         .contact-grid {
             display: grid;
             grid-template-columns: 1fr 1.1fr;
-            gap: clamp(3rem, 6vw, 6rem);
+            gap: clamp(3rem,6vw,6rem);
         }
-
         .contact-title {
-            font-size: clamp(2rem, 3.5vw, 3rem);
+            font-size: clamp(2rem,3.5vw,3rem);
             line-height: 1.1;
             letter-spacing: -0.02em;
             margin-bottom: 1rem;
@@ -793,20 +760,24 @@
             color: var(--text-body);
             line-height: 1.8;
             max-width: 420px;
-            margin-bottom: 3rem;
+            margin-bottom: 2.5rem;
+        }
+
+        /* Provençal decorative element */
+        .contact-deco {
+            margin-bottom: 2.5rem;
         }
 
         .contact-detail {
             display: flex;
             gap: 1rem;
             align-items: flex-start;
-            margin-bottom: 1.5rem;
+            margin-bottom: 1.3rem;
         }
         .contact-detail:last-child { margin-bottom: 0; }
-
         .contact-detail-icon {
-            width: 44px;
-            height: 44px;
+            width: 42px;
+            height: 42px;
             background: var(--sand);
             border: 1px solid var(--rule);
             display: flex;
@@ -816,7 +787,6 @@
             font-size: 1rem;
             border-radius: 2px;
         }
-
         .contact-detail-label {
             font-size: 0.68rem;
             font-weight: 600;
@@ -838,11 +808,10 @@
         }
         .contact-detail-value a:hover { border-color: var(--terracotta); }
 
-        /* Form */
         .contact-form {
             background: var(--sand);
             border: 1px solid var(--rule);
-            padding: clamp(2rem, 3.5vw, 3rem);
+            padding: clamp(2rem,3.5vw,3rem);
             border-radius: 2px;
             position: relative;
         }
@@ -853,8 +822,7 @@
             height: 2px;
             background: var(--terracotta);
         }
-
-        .form-group { margin-bottom: 1.25rem; }
+        .form-group { margin-bottom: 1.2rem; }
         .form-group label {
             display: block;
             font-size: 0.72rem;
@@ -862,7 +830,7 @@
             letter-spacing: 0.1em;
             text-transform: uppercase;
             color: var(--text-muted);
-            margin-bottom: 0.45rem;
+            margin-bottom: 0.4rem;
         }
         .form-group input,
         .form-group textarea,
@@ -887,20 +855,15 @@
         }
         .form-group input::placeholder,
         .form-group textarea::placeholder {
-            color: rgba(11, 29, 58, 0.25);
+            color: rgba(11,29,58,0.25);
         }
         .form-group textarea { resize: vertical; min-height: 100px; }
-        .form-group select { cursor: pointer; }
         .form-row {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 1.5rem;
         }
-        .contact-form .btn {
-            width: 100%;
-            justify-content: center;
-            margin-top: 0.75rem;
-        }
+        .contact-form .btn { width: 100%; justify-content: center; margin-top: 0.5rem; }
 
         /* ═══ FOOTER ═══ */
         footer {
@@ -913,9 +876,8 @@
             position: absolute;
             top: 0; left: 0; right: 0;
             height: 2px;
-            background: linear-gradient(90deg, var(--terracotta), var(--azur));
+            background: linear-gradient(90deg, var(--terracotta), var(--gold), var(--azur));
         }
-
         .footer-grid {
             display: grid;
             grid-template-columns: 1.8fr 1fr 1fr;
@@ -923,8 +885,8 @@
             padding-bottom: 3rem;
             border-bottom: 1px solid var(--rule-light);
         }
-
-        .footer-brand .nav-logo { color: var(--sand-light); }
+        .footer-brand .nav-home { color: var(--sand-light); }
+        .footer-brand .logo-svg .logo-text { fill: var(--sand-light); }
         .footer-brand p {
             font-size: 0.85rem;
             color: var(--text-light);
@@ -932,7 +894,6 @@
             margin-top: 1rem;
             max-width: 300px;
         }
-
         .footer-social {
             display: flex;
             gap: 0.6rem;
@@ -953,7 +914,6 @@
             border-color: var(--terracotta);
             color: var(--terracotta-light);
         }
-
         .footer-col h4 {
             font-family: 'Outfit', sans-serif;
             font-size: 0.68rem;
@@ -961,7 +921,7 @@
             letter-spacing: 0.2em;
             text-transform: uppercase;
             color: var(--sand-light);
-            margin-bottom: 1.25rem;
+            margin-bottom: 1.2rem;
         }
         .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 0.6rem; }
         .footer-col a {
@@ -971,7 +931,6 @@
             transition: color 0.3s;
         }
         .footer-col a:hover { color: var(--sand-light); }
-
         .footer-bottom {
             display: flex;
             justify-content: space-between;
@@ -980,11 +939,10 @@
         }
         .footer-bottom p {
             font-size: 0.72rem;
-            color: rgba(253, 250, 246, 0.25);
-            letter-spacing: 0.02em;
+            color: rgba(253,250,246,0.25);
         }
         .footer-bottom a {
-            color: rgba(253, 250, 246, 0.25);
+            color: rgba(253,250,246,0.25);
             text-decoration: none;
             transition: color 0.3s;
         }
@@ -994,9 +952,11 @@
         @media (max-width: 1024px) {
             .hero-grid { grid-template-columns: 1fr; }
             .hero-aside { display: none; }
-            .hero-block { width: 100%; opacity: 0.3; }
-            .service-items { grid-template-columns: 1fr; }
-            .service-item:nth-child(2) { grid-column: 1; border-left: none; padding-top: clamp(2rem, 4vw, 3.5rem); }
+            .hero-illustration { width: 100%; opacity: 0.25; }
+            .service-grid-main { grid-template-columns: 1fr; }
+            .service-item:nth-child(2) { grid-column: 1; border-left: none; padding-top: clamp(2rem,4vw,3rem); }
+            .service-grid-soon { grid-template-columns: 1fr; }
+            .service-soon:nth-child(2) { border-left: none; }
             .why-grid { grid-template-columns: 1fr; }
             .why-item:nth-child(even) { border-left: none; }
             .pricing-cards { grid-template-columns: 1fr; max-width: 420px; }
@@ -1006,7 +966,6 @@
             .contact-grid { grid-template-columns: 1fr; }
             .footer-grid { grid-template-columns: 1fr; gap: 2rem; }
         }
-
         @media (max-width: 768px) {
             .nav-links { display: none; }
             .nav-toggle { display: flex; }
@@ -1021,32 +980,40 @@
                 gap: 1rem;
                 border-bottom: 1px solid var(--rule-light);
             }
-            .nav-links.active a { color: rgba(253,250,246,0.6) !important; }
+            .nav-links.active a { color: rgba(253,250,246,0.6) !important; opacity: 1 !important; }
             .nav-links.active a:hover { color: var(--sand-light) !important; }
-            .hero { min-height: auto; padding-top: 5rem; }
-            .hero h1 { font-size: 2.2rem; }
-            .hero-deco { font-size: 12rem; }
+            .hero { min-height: auto; padding: 6rem 0 0; }
+            .hero h1 { font-size: 2rem; }
             .trust .wrap { flex-wrap: wrap; }
-            .trust-item { border-right: none; border-bottom: 1px solid var(--rule); min-width: 50%; }
-            .services-top, .why-top { flex-direction: column; align-items: flex-start; gap: 1.5rem; }
+            .trust-item { min-width: 50%; border-bottom: 1px solid var(--rule); }
+            .services-top, .why-top { flex-direction: column; align-items: flex-start; gap: 1rem; }
             .services-intro, .why-intro { text-align: left; }
             .form-row { grid-template-columns: 1fr; }
             .footer-bottom { flex-direction: column; gap: 0.5rem; text-align: center; }
         }
-
         @media (max-width: 480px) {
-            .trust-item { min-width: 100%; }
-            .hero h1 { font-size: 1.85rem; }
-            .pricing-price { font-size: 2.2rem; }
+            .trust-item { min-width: 100%; border-right: none; }
         }
     </style>
 </head>
 <body>
 
-    <!-- NAVIGATION -->
+    <!-- ═══ NAV ═══ -->
     <nav>
         <div class="wrap">
-            <a href="#" class="nav-logo"><span class="nav-logo-dot"></span>Studio Azur</a>
+            <a href="#" class="nav-home">
+                <!-- Custom SVG Logo: wave + sun -->
+                <svg class="logo-svg" viewBox="0 0 180 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Sun arc -->
+                    <circle class="logo-sun" cx="16" cy="18" r="5" opacity="0.9"/>
+                    <path class="logo-sun" d="M16 10v2M16 24v2M10 18H8M24 18h-2M11.2 13.2l1.4 1.4M19.4 21.4l1.4 1.4M20.8 13.2l-1.4 1.4M12.6 21.4l-1.4 1.4" stroke="#D4A853" stroke-width="1.2" stroke-linecap="round" fill="none"/>
+                    <!-- Wave -->
+                    <path class="logo-wave" d="M2 22c3-3 6-3 9 0s6 3 9 0 6-3 9 0" stroke="#2E86AB" stroke-width="2" stroke-linecap="round" fill="none"/>
+                    <path class="logo-wave" d="M5 26c2.5-2.5 5-2.5 7.5 0s5 2.5 7.5 0 5-2.5 7.5 0" stroke="#2E86AB" stroke-width="1.5" stroke-linecap="round" fill="none" opacity="0.4"/>
+                    <!-- Text -->
+                    <text class="logo-text" x="38" y="23" font-size="18" letter-spacing="-0.5">Studio Azur</text>
+                </svg>
+            </a>
             <ul class="nav-links" id="navLinks">
                 <li><a href="#services">Services</a></li>
                 <li><a href="#pourquoi">Pourquoi nous</a></li>
@@ -1059,10 +1026,76 @@
         </div>
     </nav>
 
-    <!-- HERO -->
+    <!-- ═══ HERO ═══ -->
     <section class="hero">
-        <div class="hero-block"></div>
-        <div class="hero-deco">Az</div>
+        <!-- Mediterranean coastal illustration -->
+        <div class="hero-illustration">
+            <svg viewBox="0 0 700 700" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMaxYMax slice" width="100%" height="100%">
+                <!-- Sky gradient -->
+                <defs>
+                    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="0%" stop-color="#183560" stop-opacity="0.3"/>
+                        <stop offset="40%" stop-color="#D4A853" stop-opacity="0.08"/>
+                        <stop offset="100%" stop-color="#0B1D3A" stop-opacity="0"/>
+                    </linearGradient>
+                    <radialGradient id="sunGlow" cx="50%" cy="55%" r="30%">
+                        <stop offset="0%" stop-color="#D4A853" stop-opacity="0.25"/>
+                        <stop offset="60%" stop-color="#D4A853" stop-opacity="0.05"/>
+                        <stop offset="100%" stop-color="#D4A853" stop-opacity="0"/>
+                    </radialGradient>
+                    <linearGradient id="seaGrad" x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="0%" stop-color="#2E86AB" stop-opacity="0.15"/>
+                        <stop offset="100%" stop-color="#0B1D3A" stop-opacity="0.3"/>
+                    </linearGradient>
+                </defs>
+                <rect width="700" height="700" fill="url(#sky)"/>
+                <!-- Sun glow -->
+                <circle cx="350" cy="380" r="200" fill="url(#sunGlow)"/>
+                <!-- Sun disc -->
+                <circle cx="350" cy="400" r="35" fill="#D4A853" opacity="0.2"/>
+                <circle cx="350" cy="400" r="22" fill="#D4A853" opacity="0.1"/>
+                <!-- Sun rays -->
+                <g stroke="#D4A853" stroke-width="1" opacity="0.08">
+                    <line x1="350" y1="355" x2="350" y2="330"/>
+                    <line x1="380" y1="375" x2="400" y2="360"/>
+                    <line x1="320" y1="375" x2="300" y2="360"/>
+                    <line x1="390" y1="400" x2="415" y2="400"/>
+                    <line x1="310" y1="400" x2="285" y2="400"/>
+                </g>
+                <!-- Horizon line -->
+                <line x1="0" y1="420" x2="700" y2="420" stroke="#F4EDE4" stroke-width="0.5" opacity="0.1"/>
+                <!-- Sea -->
+                <rect x="0" y="420" width="700" height="280" fill="url(#seaGrad)"/>
+                <!-- Gentle waves -->
+                <path d="M0 440 Q80 430 160 440 T320 440 T480 440 T640 440 T700 440" stroke="#4BA3C7" stroke-width="0.7" fill="none" opacity="0.12"/>
+                <path d="M0 460 Q90 450 180 460 T360 460 T540 460 T700 460" stroke="#4BA3C7" stroke-width="0.5" fill="none" opacity="0.08"/>
+                <path d="M0 485 Q100 475 200 485 T400 485 T600 485 T700 485" stroke="#4BA3C7" stroke-width="0.4" fill="none" opacity="0.06"/>
+                <!-- Coastline silhouette — provençal village -->
+                <g opacity="0.06" fill="#F4EDE4">
+                    <!-- Hills -->
+                    <path d="M500 420 Q540 380 580 390 Q620 370 660 385 Q690 375 700 380 V420 Z"/>
+                    <!-- Bell tower -->
+                    <rect x="590" y="355" width="14" height="65" rx="1"/>
+                    <rect x="593" y="350" width="8" height="8" rx="1"/>
+                    <polygon points="589,355 597,342 605,355"/>
+                    <!-- Houses -->
+                    <rect x="560" y="385" width="25" height="35" rx="1"/>
+                    <polygon points="558,385 572,370 586,385"/>
+                    <rect x="620" y="378" width="20" height="42" rx="1"/>
+                    <polygon points="618,378 630,366 642,378"/>
+                    <rect x="645" y="382" width="18" height="38" rx="1"/>
+                    <polygon points="643,382 654,372 665,382"/>
+                    <!-- Pin parasol tree -->
+                    <rect x="535" y="388" width="3" height="32"/>
+                    <ellipse cx="536" cy="385" rx="14" ry="8"/>
+                    <!-- Small sailboat -->
+                    <polygon points="470,410 478,395 480,410" fill="#F4EDE4" opacity="0.8"/>
+                    <polygon points="470,410 462,400 478,410" fill="#F4EDE4" opacity="0.5"/>
+                    <line x1="460" y1="412" x2="485" y2="412" stroke="#F4EDE4" stroke-width="1.5"/>
+                </g>
+            </svg>
+        </div>
+
         <div class="wrap">
             <div class="hero-grid">
                 <div>
@@ -1082,12 +1115,12 @@
                         <div class="hero-stat">
                             <div class="hero-stat-num">+180%</div>
                             <div class="hero-stat-label">Visibilité en ligne</div>
-                            <div class="hero-stat-rule"></div>
+                            <div class="hero-stat-accent"></div>
                         </div>
                         <div class="hero-stat">
                             <div class="hero-stat-num">×3</div>
                             <div class="hero-stat-label">Contacts générés</div>
-                            <div class="hero-stat-rule"></div>
+                            <div class="hero-stat-accent"></div>
                         </div>
                         <div class="hero-stat">
                             <div class="hero-stat-num">7j</div>
@@ -1097,20 +1130,27 @@
                 </div>
             </div>
         </div>
-    </section>
 
-    <!-- TRUST BAR -->
-    <section class="trust">
-        <div class="wrap">
-            <div class="trust-item r"><span class="trust-emoji">🎨</span> Design sur-mesure</div>
-            <div class="trust-item r r-1"><span class="trust-emoji">⚡</span> Sites ultra-rapides</div>
-            <div class="trust-item r r-2"><span class="trust-emoji">📍</span> Experts SEO local</div>
-            <div class="trust-item r r-3"><span class="trust-emoji">🤝</span> Accompagnement humain</div>
-            <div class="trust-item r r-4"><span class="trust-emoji">🔒</span> RGPD &amp; sécurité</div>
+        <!-- Organic wave transition -->
+        <div class="wave-divider">
+            <svg viewBox="0 0 1440 60" preserveAspectRatio="none">
+                <path d="M0 30C120 45 240 15 360 25C480 35 600 55 720 40C840 25 960 10 1080 20C1200 30 1320 50 1440 35V60H0Z" fill="var(--sand)"/>
+            </svg>
         </div>
     </section>
 
-    <!-- SERVICES -->
+    <!-- ═══ TRUST BAR ═══ -->
+    <section class="trust">
+        <div class="wrap">
+            <div class="trust-item r">🎨 Design sur-mesure</div>
+            <div class="trust-item r r-1">⚡ Sites ultra-rapides</div>
+            <div class="trust-item r r-2">📍 Experts SEO local</div>
+            <div class="trust-item r r-3">🤝 Accompagnement humain</div>
+            <div class="trust-item r r-4">🔒 RGPD &amp; sécurité</div>
+        </div>
+    </section>
+
+    <!-- ═══ SERVICES ═══ -->
     <section class="services" id="services">
         <div class="wrap">
             <div class="services-top r">
@@ -1120,10 +1160,26 @@
                 </div>
                 <p class="services-intro">De la création à la maintenance, nous prenons en charge votre présence digitale pour que vous puissiez vous concentrer sur votre métier.</p>
             </div>
-            <div class="services-rule rule-reveal"></div>
-            <div class="service-items">
+            <div class="services-rule rule-anim"></div>
+
+            <div class="service-grid-main">
                 <div class="service-item r">
-                    <div class="service-num">01</div>
+                    <div class="service-icon">
+                        <!-- Custom SVG: Browser/screen -->
+                        <svg viewBox="0 0 48 48" fill="none">
+                            <rect x="4" y="8" width="40" height="28" rx="3" stroke="var(--ocean)" stroke-width="1.5" fill="none"/>
+                            <line x1="4" y1="16" x2="44" y2="16" stroke="var(--ocean)" stroke-width="1.5"/>
+                            <circle cx="10" cy="12" r="1.5" fill="var(--terracotta)"/>
+                            <circle cx="15" cy="12" r="1.5" fill="var(--gold)" opacity="0.6"/>
+                            <circle cx="20" cy="12" r="1.5" fill="var(--azur)" opacity="0.4"/>
+                            <rect x="10" y="22" width="16" height="2" rx="1" fill="var(--azur)" opacity="0.3"/>
+                            <rect x="10" y="27" width="28" height="2" rx="1" fill="var(--ocean)" opacity="0.08"/>
+                            <rect x="10" y="31" width="20" height="2" rx="1" fill="var(--ocean)" opacity="0.05"/>
+                            <line x1="20" y1="36" x2="28" y2="36" stroke="var(--ocean)" stroke-width="1.5"/>
+                            <line x1="24" y1="36" x2="24" y2="42" stroke="var(--ocean)" stroke-width="1.5"/>
+                            <line x1="18" y1="42" x2="30" y2="42" stroke="var(--ocean)" stroke-width="1.5"/>
+                        </svg>
+                    </div>
                     <h3>Site Vitrine</h3>
                     <p>Un site web élégant qui raconte votre histoire et convertit les visiteurs en clients. Design premium adapté à votre identité.</p>
                     <ul class="service-features">
@@ -1133,8 +1189,17 @@
                         <li>Formulaire de contact intégré</li>
                     </ul>
                 </div>
+
                 <div class="service-item r r-2">
-                    <div class="service-num">02</div>
+                    <div class="service-icon">
+                        <!-- Custom SVG: Map pin + magnifier -->
+                        <svg viewBox="0 0 48 48" fill="none">
+                            <circle cx="22" cy="22" r="12" stroke="var(--ocean)" stroke-width="1.5" fill="none"/>
+                            <line x1="31" y1="31" x2="42" y2="42" stroke="var(--ocean)" stroke-width="2" stroke-linecap="round"/>
+                            <path d="M22 14c-4.4 0-8 3.3-8 7.5C14 27 22 33 22 33s8-6 8-11.5c0-4.2-3.6-7.5-8-7.5z" stroke="var(--terracotta)" stroke-width="1.2" fill="none"/>
+                            <circle cx="22" cy="21.5" r="2.5" fill="var(--terracotta)" opacity="0.3"/>
+                        </svg>
+                    </div>
                     <h3>SEO Local</h3>
                     <p>Soyez trouvé par les clients de votre zone. Nous optimisons votre visibilité sur Google pour Nice, Cannes, Antibes et environs.</p>
                     <ul class="service-features">
@@ -1144,8 +1209,19 @@
                         <li>Rapport de performance mensuel</li>
                     </ul>
                 </div>
+
                 <div class="service-item r r-1">
-                    <div class="service-num">03</div>
+                    <div class="service-icon">
+                        <!-- Custom SVG: Shield + wrench -->
+                        <svg viewBox="0 0 48 48" fill="none">
+                            <path d="M24 4L8 12v12c0 10 7 18 16 20 9-2 16-10 16-20V12L24 4z" stroke="var(--ocean)" stroke-width="1.5" fill="none"/>
+                            <path d="M24 4L8 12v12c0 10 7 18 16 20 9-2 16-10 16-20V12L24 4z" fill="var(--azur)" opacity="0.04"/>
+                            <path d="M19 24l-3-3 2-2 3.5 3.5L29 15l2 2L21.5 28.5 19 24z" fill="none"/>
+                            <circle cx="20" cy="22" r="4" stroke="var(--azur)" stroke-width="1.2" fill="none"/>
+                            <path d="M28 26l4 4M30 28l2-2" stroke="var(--terracotta)" stroke-width="1.5" stroke-linecap="round"/>
+                            <circle cx="29" cy="19" r="1.5" fill="var(--gold)" opacity="0.5"/>
+                        </svg>
+                    </div>
                     <h3>Maintenance &amp; Suivi</h3>
                     <p>Votre site évolue avec votre activité. Mises à jour, sécurité et support technique pour une tranquillité d'esprit totale.</p>
                     <ul class="service-features">
@@ -1156,12 +1232,86 @@
                     </ul>
                 </div>
             </div>
+
+            <!-- Coming soon services -->
+            <p class="label services-soon-label r">Bientôt disponible</p>
+            <div class="services-soon-rule rule-anim"></div>
+
+            <div class="service-grid-soon">
+                <div class="service-soon r">
+                    <div class="soon-badge">Bientôt</div>
+                    <div class="service-icon">
+                        <!-- Custom SVG: Gears/workflow -->
+                        <svg viewBox="0 0 48 48" fill="none">
+                            <circle cx="18" cy="18" r="7" stroke="var(--ocean)" stroke-width="1.5" fill="none"/>
+                            <circle cx="18" cy="18" r="3" fill="var(--gold)" opacity="0.2"/>
+                            <circle cx="34" cy="30" r="5.5" stroke="var(--ocean)" stroke-width="1.5" fill="none"/>
+                            <circle cx="34" cy="30" r="2" fill="var(--gold)" opacity="0.2"/>
+                            <path d="M18 11v-3M18 28v-3M11 18h-3M28 18h-3" stroke="var(--ocean)" stroke-width="1.2" stroke-linecap="round"/>
+                            <path d="M34 24.5v-2M34 37.5v-2M28.5 30h-2M41.5 30h-2" stroke="var(--ocean)" stroke-width="1" stroke-linecap="round"/>
+                            <path d="M23 22l6 4" stroke="var(--terracotta)" stroke-width="1.2" stroke-linecap="round" stroke-dasharray="2 2"/>
+                            <path d="M12 13l1.5 1.5M22.5 22.5L24 24M12 23l1.5-1.5M22.5 13.5L24 12" stroke="var(--ocean)" stroke-width="1" stroke-linecap="round"/>
+                        </svg>
+                    </div>
+                    <h3>Automatisation Business</h3>
+                    <p>Workflows automatisés, bots, intégrations sur mesure pour gagner du temps et scaler votre activité.</p>
+                    <ul class="service-features">
+                        <li>Automatisation des tâches répétitives</li>
+                        <li>Bots et chatbots sur mesure</li>
+                        <li>Intégrations API personnalisées</li>
+                        <li>Tableaux de bord intelligents</li>
+                    </ul>
+                </div>
+
+                <div class="service-soon r r-1">
+                    <div class="soon-badge">Bientôt</div>
+                    <div class="service-icon">
+                        <!-- Custom SVG: Brain/neural -->
+                        <svg viewBox="0 0 48 48" fill="none">
+                            <path d="M24 8c-3 0-5.5 1.5-7 4-2-0.5-4.5 0.5-5.5 3-1.5 1.5-2 4-1 6 -1.5 2-1 5 1 6.5 1 2 3 3.5 5.5 3.5h0" stroke="var(--ocean)" stroke-width="1.5" fill="none"/>
+                            <path d="M24 8c3 0 5.5 1.5 7 4 2-0.5 4.5 0.5 5.5 3 1.5 1.5 2 4 1 6 1.5 2 1 5-1 6.5-1 2-3 3.5-5.5 3.5h0" stroke="var(--ocean)" stroke-width="1.5" fill="none"/>
+                            <line x1="24" y1="31" x2="24" y2="42" stroke="var(--ocean)" stroke-width="1.5"/>
+                            <circle cx="24" cy="16" r="2" fill="var(--azur)" opacity="0.3"/>
+                            <circle cx="18" cy="21" r="1.5" fill="var(--terracotta)" opacity="0.3"/>
+                            <circle cx="30" cy="21" r="1.5" fill="var(--terracotta)" opacity="0.3"/>
+                            <circle cx="20" cy="27" r="1.5" fill="var(--gold)" opacity="0.3"/>
+                            <circle cx="28" cy="27" r="1.5" fill="var(--gold)" opacity="0.3"/>
+                            <path d="M18 21l6-5M30 21l-6-5M20 27l-2-6M28 27l2-6M20 27h8" stroke="var(--ocean)" stroke-width="0.7" opacity="0.2"/>
+                        </svg>
+                    </div>
+                    <h3>Solutions IA &amp; Agents Intelligents</h3>
+                    <p>Agents AI custom pour service client, prospection, support. L'intelligence artificielle au service de votre business.</p>
+                    <ul class="service-features">
+                        <li>Agents IA personnalisés</li>
+                        <li>Automatisation service client</li>
+                        <li>Prospection intelligente</li>
+                        <li>Support 24/7 automatisé</li>
+                    </ul>
+                </div>
+            </div>
         </div>
     </section>
 
-    <!-- POURQUOI NOUS -->
+    <!-- Wave transition to dark -->
+    <div class="wave-divider" style="background:var(--sand-light);">
+        <svg viewBox="0 0 1440 50" preserveAspectRatio="none">
+            <path d="M0 20C180 40 360 5 540 25C720 45 900 10 1080 30C1260 50 1380 15 1440 25V50H0Z" fill="var(--ocean)"/>
+        </svg>
+    </div>
+
+    <!-- ═══ POURQUOI NOUS ═══ -->
     <section class="why" id="pourquoi">
-        <div class="why-quote-bg">L'excellence</div>
+        <!-- Decorative provençal arch -->
+        <div class="why-arch">
+            <svg width="300" height="500" viewBox="0 0 300 500" fill="none">
+                <path d="M30 500V200C30 110 80 50 150 50C220 50 270 110 270 200V500" stroke="var(--sand-light)" stroke-width="1.5"/>
+                <path d="M60 500V220C60 140 95 80 150 80C205 80 240 140 240 220V500" stroke="var(--sand-light)" stroke-width="0.8"/>
+                <line x1="150" y1="50" x2="150" y2="500" stroke="var(--sand-light)" stroke-width="0.5" stroke-dasharray="4 6"/>
+                <circle cx="150" cy="180" r="30" stroke="var(--sand-light)" stroke-width="0.8" fill="none"/>
+                <circle cx="150" cy="180" r="12" fill="var(--gold)" opacity="0.08"/>
+            </svg>
+        </div>
+
         <div class="wrap">
             <div class="why-top r">
                 <div>
@@ -1170,7 +1320,7 @@
                 </div>
                 <p class="why-intro">Nous ne sommes pas une agence généraliste. Nous connaissons les défis des artisans et commerces locaux, et nous créons des solutions digitales qui parlent à vos vrais clients.</p>
             </div>
-            <div class="why-rule rule-reveal"></div>
+            <div class="why-rule rule-anim"></div>
             <div class="why-grid">
                 <div class="why-item r">
                     <div class="why-num">01</div>
@@ -1204,15 +1354,22 @@
         </div>
     </section>
 
-    <!-- PRICING -->
+    <!-- Wave transition to sand -->
+    <div class="wave-divider" style="background:var(--ocean);">
+        <svg viewBox="0 0 1440 50" preserveAspectRatio="none">
+            <path d="M0 15C200 40 400 0 600 20C800 40 1000 5 1200 25C1350 40 1420 10 1440 20V50H0Z" fill="var(--sand)"/>
+        </svg>
+    </div>
+
+    <!-- ═══ PRICING ═══ -->
     <section class="pricing" id="tarifs">
-        <div class="wrap wrap-narrow">
+        <div class="wrap" style="max-width:1080px;">
             <div class="pricing-top r">
                 <p class="label pricing-label">Tarifs</p>
                 <h2 class="pricing-title">Des formules claires, sans surprise</h2>
                 <p class="pricing-subtitle">Chaque formule inclut le design, le développement et la mise en ligne. Aucun coût caché.</p>
             </div>
-            <div class="pricing-rule rule-reveal"></div>
+            <div class="pricing-rule rule-anim"></div>
             <div class="pricing-cards">
                 <div class="pricing-card r">
                     <div class="pricing-name">Essentiel</div>
@@ -1263,17 +1420,59 @@
         </div>
     </section>
 
-    <!-- CONTACT -->
+    <!-- ═══ CONTACT ═══ -->
     <section class="contact" id="contact">
         <div class="wrap">
             <div class="contact-top r">
                 <p class="label contact-label">Contact</p>
             </div>
-            <div class="contact-rule rule-reveal"></div>
+            <div class="contact-rule rule-anim"></div>
             <div class="contact-grid">
                 <div class="r">
                     <h2 class="contact-title">Parlons de votre projet</h2>
                     <p class="contact-desc">Décrivez-nous votre activité et vos besoins. Nous revenons vers vous sous 24h avec une proposition personnalisée.</p>
+
+                    <!-- Decorative provençal element: shuttered window with bougainvillier -->
+                    <div class="contact-deco">
+                        <svg width="160" height="120" viewBox="0 0 160 120" fill="none">
+                            <!-- Window frame -->
+                            <rect x="30" y="15" width="60" height="80" rx="2" stroke="var(--ocean)" stroke-width="1.5" fill="none"/>
+                            <!-- Arch top -->
+                            <path d="M30 40 A30 25 0 0 1 90 40" stroke="var(--ocean)" stroke-width="1.5" fill="var(--azur)" fill-opacity="0.05"/>
+                            <!-- Shutters -->
+                            <rect x="12" y="18" width="18" height="74" rx="1" stroke="var(--azur)" stroke-width="1" fill="var(--azur)" fill-opacity="0.06"/>
+                            <rect x="90" y="18" width="18" height="74" rx="1" stroke="var(--azur)" stroke-width="1" fill="var(--azur)" fill-opacity="0.06"/>
+                            <line x1="21" y1="22" x2="21" y2="88" stroke="var(--azur)" stroke-width="0.5" opacity="0.3"/>
+                            <line x1="99" y1="22" x2="99" y2="88" stroke="var(--azur)" stroke-width="0.5" opacity="0.3"/>
+                            <!-- Window sill -->
+                            <rect x="25" y="93" width="70" height="4" rx="1" fill="var(--sand)" stroke="var(--ocean)" stroke-width="0.8"/>
+                            <!-- Bougainvillier vine -->
+                            <path d="M5 10C15 20 20 35 18 55C16 70 20 85 15 100" stroke="var(--terracotta)" stroke-width="1" fill="none" opacity="0.4"/>
+                            <path d="M8 5C20 15 25 25 22 45" stroke="var(--terracotta)" stroke-width="0.8" fill="none" opacity="0.3"/>
+                            <!-- Bougainvillier flowers (clusters) -->
+                            <g fill="var(--terracotta)" opacity="0.2">
+                                <circle cx="8" cy="15" r="4"/><circle cx="14" cy="12" r="3"/><circle cx="5" cy="20" r="3"/>
+                                <circle cx="20" cy="30" r="3.5"/><circle cx="15" cy="33" r="3"/><circle cx="22" cy="36" r="2.5"/>
+                                <circle cx="18" cy="50" r="3"/><circle cx="13" cy="53" r="2.5"/><circle cx="20" cy="55" r="3"/>
+                                <circle cx="16" cy="68" r="2.5"/><circle cx="20" cy="72" r="3"/><circle cx="14" cy="74" r="2"/>
+                            </g>
+                            <!-- Leaves -->
+                            <g fill="var(--ocean)" opacity="0.08">
+                                <ellipse cx="10" cy="25" rx="4" ry="2" transform="rotate(-30 10 25)"/>
+                                <ellipse cx="18" cy="42" rx="3.5" ry="1.8" transform="rotate(20 18 42)"/>
+                                <ellipse cx="16" cy="60" rx="3.5" ry="1.8" transform="rotate(-15 16 60)"/>
+                                <ellipse cx="18" cy="78" rx="3" ry="1.5" transform="rotate(25 18 78)"/>
+                            </g>
+                            <!-- Ceramic tile pattern on sill -->
+                            <g fill="var(--azur)" opacity="0.1">
+                                <rect x="30" y="100" width="8" height="8"/><rect x="46" y="100" width="8" height="8"/><rect x="62" y="100" width="8" height="8"/><rect x="78" y="100" width="8" height="8"/>
+                            </g>
+                            <g fill="var(--terracotta)" opacity="0.08">
+                                <rect x="38" y="100" width="8" height="8"/><rect x="54" y="100" width="8" height="8"/><rect x="70" y="100" width="8" height="8"/>
+                            </g>
+                        </svg>
+                    </div>
+
                     <div class="contact-detail">
                         <div class="contact-detail-icon">✉</div>
                         <div>
@@ -1335,12 +1534,20 @@
         </div>
     </section>
 
-    <!-- FOOTER -->
+    <!-- ═══ FOOTER ═══ -->
     <footer>
         <div class="wrap">
             <div class="footer-grid">
                 <div class="footer-brand">
-                    <a href="#" class="nav-logo"><span class="nav-logo-dot"></span>Studio Azur</a>
+                    <a href="#" class="nav-home">
+                        <svg class="logo-svg" viewBox="0 0 180 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <circle class="logo-sun" cx="16" cy="18" r="5" opacity="0.9"/>
+                            <path class="logo-sun" d="M16 10v2M16 24v2M10 18H8M24 18h-2M11.2 13.2l1.4 1.4M19.4 21.4l1.4 1.4M20.8 13.2l-1.4 1.4M12.6 21.4l-1.4 1.4" stroke="#D4A853" stroke-width="1.2" stroke-linecap="round" fill="none"/>
+                            <path class="logo-wave" d="M2 22c3-3 6-3 9 0s6 3 9 0 6-3 9 0" stroke="#2E86AB" stroke-width="2" stroke-linecap="round" fill="none"/>
+                            <path class="logo-wave" d="M5 26c2.5-2.5 5-2.5 7.5 0s5 2.5 7.5 0 5-2.5 7.5 0" stroke="#2E86AB" stroke-width="1.5" stroke-linecap="round" fill="none" opacity="0.4"/>
+                            <text class="logo-text" x="38" y="23" font-size="18" letter-spacing="-0.5">Studio Azur</text>
+                        </svg>
+                    </a>
                     <p>Agence web spécialisée pour artisans et commerces de la Côte d'Azur. Des sites qui reflètent la qualité de votre travail.</p>
                     <div class="footer-social">
                         <a href="#" aria-label="Instagram">
@@ -1382,14 +1589,12 @@
 
     <script>
         // Scroll reveal
-        const obs = new IntersectionObserver((entries) => {
-            entries.forEach(e => {
-                if (e.isIntersecting) { e.target.classList.add('v'); obs.unobserve(e.target); }
-            });
+        const obs = new IntersectionObserver(entries => {
+            entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('v'); obs.unobserve(e.target); } });
         }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
-        document.querySelectorAll('.r, .rule-reveal').forEach(el => obs.observe(el));
+        document.querySelectorAll('.r, .rule-anim').forEach(el => obs.observe(el));
 
-        // Nav
+        // Nav scroll state
         const nav = document.querySelector('nav');
         let raf = false;
         window.addEventListener('scroll', () => {
