@@ -6,7 +6,7 @@
  * returns JSON success/error.
  *
  * Required DNS record for MailChannels SPF:
- *   TXT _mailchannels.studioazur.dev "v=mc1 cfid=studioazur-site.pages.dev"
+ *   TXT _mailchannels.studioazur.dev "v=mc1 cfid=studioazur.pages.dev"
  *
  * Destination: contact@studioazur.dev
  */
