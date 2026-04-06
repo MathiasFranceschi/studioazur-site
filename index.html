@@ -7,13 +7,18 @@
     <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
     <meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=()">
     <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; script-src 'self' 'unsafe-inline'; connect-src 'self'; form-action 'self'; img-src 'self' data: https://images.unsplash.com;">
-    <title>Studio Azur — Agence Web pour Artisans & Commerces | Côte d'Azur</title>
-    <meta name="description" content="Studio Azur conçoit des sites web premium pour artisans et commerces de proximité sur la Côte d'Azur. Design sur-mesure, SEO local, résultats concrets.">
-    <meta property="og:title" content="Studio Azur — Sites Web Premium pour la Côte d'Azur">
-    <meta property="og:description" content="Votre vitrine digitale, à la hauteur de votre savoir-faire. Sites web sur-mesure pour artisans et commerces de la Riviera.">
+    <title>Studio Azur — Création de sites web pour artisans | Nice, Côte d'Azur</title>
+    <meta name="description" content="Création de sites web sur-mesure pour artisans et commerces de proximité à Nice, Cannes, Antibes. Design premium, SEO local, résultats concrets. Studio Azur, agence web Côte d'Azur.">
+    <meta property="og:title" content="Studio Azur — Création de sites web pour artisans | Côte d'Azur">
+    <meta property="og:description" content="Sites web sur-mesure pour artisans et commerces de la Côte d'Azur. Design premium, SEO local, résultats concrets.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://studioazur.dev">
-    <meta name="theme-color" content="#0a0f1a">
+    <meta property="og:locale" content="fr_FR">
+    <meta property="og:site_name" content="Studio Azur">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Studio Azur — Création de sites web pour artisans | Côte d'Azur">
+    <meta name="twitter:description" content="Sites web sur-mesure pour artisans et commerces de la Côte d'Azur. Design premium, SEO local, résultats concrets.">
+    <meta name="theme-color" content="#f8f5f0">
     <link rel="canonical" href="https://studioazur.dev">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -211,7 +216,7 @@
         .hero-bg {
             position: absolute; inset: 0;
             background:
-                linear-gradient(180deg, rgba(10,15,26,0.3) 0%, rgba(10,15,26,0.1) 40%, rgba(10,15,26,0.7) 80%, var(--noir) 100%),
+                linear-gradient(180deg, rgba(10,15,26,0.3) 0%, rgba(10,15,26,0.1) 40%, rgba(10,15,26,0.5) 80%, rgba(30,25,20,0.85) 100%),
                 url('https://images.unsplash.com/photo-1533104816931-20fa691ff6ca?w=1920&q=80&auto=format') center/cover no-repeat;
         }
         .hero-content {
@@ -490,11 +495,11 @@
 
         /* ═══ MARQUEE ═══ */
         .marquee {
-            padding: clamp(1.5rem, 3vh, 2.5rem) 0;
+            padding: clamp(1.2rem, 2.5vh, 2rem) 0;
             overflow: hidden;
-            background: var(--cream);
-            border-top: 1px solid rgba(0,0,0,0.04);
-            border-bottom: 1px solid rgba(0,0,0,0.04);
+            background: var(--linen);
+            border-top: 1px solid rgba(0,0,0,0.06);
+            border-bottom: 1px solid rgba(0,0,0,0.06);
         }
         .marquee-track {
             display: flex;
@@ -504,89 +509,23 @@
         @keyframes marqueeScroll { to { transform: translateX(-50%); } }
         .marquee-item {
             font-family: var(--serif);
-            font-size: clamp(1.5rem, 3vw, 3rem);
-            font-weight: 300;
+            font-size: clamp(1.1rem, 2vw, 1.6rem);
+            font-weight: 400;
             font-style: italic;
-            color: rgba(0,0,0,0.06);
+            color: #1a2332;
             white-space: nowrap;
             padding: 0 clamp(1.5rem, 3vw, 3rem);
         }
         .marquee-item .dot {
             display: inline-block;
-            width: 6px; height: 6px;
-            background: var(--or);
+            width: 5px; height: 5px;
+            background: var(--terre);
             border-radius: 50%;
             margin: 0 clamp(1.5rem, 3vw, 3rem);
             vertical-align: middle;
-            opacity: 0.4;
         }
 
-        /* ═══ TESTIMONIALS — Staggered ═══ */
-        .testi {
-            padding: clamp(6rem, 12vh, 10rem) clamp(1.5rem, 4vw, 4rem);
-            background: #e9f2f7;
-            position: relative;
-        }
-        .testi-header {
-            margin-bottom: clamp(4rem, 8vh, 7rem);
-        }
-        .testi-tag {
-            font-size: 0.6rem; font-weight: 600;
-            letter-spacing: 0.35em; text-transform: uppercase;
-            color: var(--azur);
-            margin-bottom: 1rem;
-        }
-        .testi-title {
-            font-family: var(--serif);
-            font-size: clamp(2.5rem, 5vw, 5rem);
-            font-weight: 300;
-            line-height: 1;
-            letter-spacing: -0.03em;
-            color: var(--noir);
-        }
-        .testi-title em { font-style: italic; font-weight: 400; }
-
-        .testi-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr 1fr;
-            gap: 2rem;
-            max-width: 1400px;
-        }
-        .testi-card {
-            background: #fff;
-            border: 1px solid rgba(0,0,0,0.04);
-            padding: clamp(2rem, 3vw, 3rem);
-            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-        .testi-card:nth-child(2) { transform: translateY(3rem); }
-        .testi-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 20px 50px rgba(0,0,0,0.06);
-        }
-        .testi-card:nth-child(2):hover { transform: translateY(calc(3rem - 4px)); }
-        .testi-quote {
-            font-family: var(--serif);
-            font-size: clamp(1rem, 1.5vw, 1.25rem);
-            font-weight: 300;
-            font-style: italic;
-            color: #5a5a55;
-            line-height: 1.75;
-            margin-bottom: 2rem;
-            position: relative;
-            padding-left: 1.5rem;
-            border-left: 2px solid var(--azur);
-        }
-        .testi-author {
-            font-size: 0.85rem;
-            font-weight: 600;
-            color: var(--noir);
-        }
-        .testi-role {
-            font-size: 0.65rem;
-            color: #8a8a82;
-            letter-spacing: 0.05em;
-            margin-top: 0.2rem;
-        }
+        /* testimonials removed — will return with real clients */
 
         /* ═══ PRICING — Asymmetric ═══ */
         .pricing {
@@ -642,7 +581,7 @@
         }
         .price-card:hover { background: #fff; }
         .price-card.feat {
-            background: var(--noir);
+            background: #1a6b8a;
             color: var(--white);
             border-color: transparent;
             position: relative;
@@ -851,9 +790,9 @@
 
         /* ═══ FOOTER ═══ */
         footer {
-            background: var(--noir);
+            background: var(--linen);
             padding: 3rem clamp(1.5rem, 4vw, 4rem);
-            border-top: 1px solid rgba(255,255,255,0.04);
+            border-top: 1px solid rgba(0,0,0,0.06);
         }
         .footer-inner {
             max-width: 1400px;
@@ -869,7 +808,7 @@
             font-family: var(--serif);
             font-size: 1.1rem;
             font-weight: 400;
-            color: rgba(240,236,228,0.4);
+            color: var(--noir);
         }
         .footer-links {
             display: flex; gap: 2rem; list-style: none;
@@ -877,13 +816,13 @@
         .footer-links a {
             font-size: 0.65rem; font-weight: 500;
             letter-spacing: 0.1em; text-transform: uppercase;
-            color: rgba(240,236,228,0.2);
+            color: #8a8a82;
             transition: color 0.3s;
         }
-        .footer-links a:hover { color: var(--or); }
+        .footer-links a:hover { color: var(--terre); }
         .footer-copy {
             font-size: 0.6rem;
-            color: rgba(240,236,228,0.12);
+            color: #b0a89c;
             letter-spacing: 0.05em;
         }
 
@@ -902,9 +841,6 @@
         @media (max-width: 1024px) {
             .showcase { grid-template-columns: 1fr; }
             .showcase-visual { min-height: 50vh; }
-            .testi-grid { grid-template-columns: 1fr; max-width: 550px; }
-            .testi-card:nth-child(2) { transform: none; }
-            .testi-card:nth-child(2):hover { transform: translateY(-4px); }
             .pricing-grid { grid-template-columns: 1fr; max-width: 420px; margin: 0 auto; }
             .price-card.feat { margin: 0; }
             .contact { grid-template-columns: 1fr; }
@@ -979,13 +915,13 @@
             </svg>
             Studio Azur
         </a>
-        <button class="menu-btn" id="menuBtn" aria-label="Menu">
+        <button class="menu-btn" id="menuBtn" aria-label="Ouvrir le menu de navigation" aria-expanded="false">
             <span></span><span></span><span></span>
         </button>
     </nav>
 
     <!-- FULL-SCREEN MENU -->
-    <div class="menu-overlay" id="menuOverlay">
+    <div class="menu-overlay" id="menuOverlay" role="navigation" aria-label="Menu principal">
         <ul class="menu-list">
             <li><a href="#services" class="menu-link">Services</a></li>
             <li><a href="#approche" class="menu-link">Notre approche</a></li>
@@ -1023,7 +959,7 @@
     </section>
 
     <!-- MARQUEE -->
-    <div class="marquee">
+    <div class="marquee" aria-hidden="true">
         <div class="marquee-track">
             <span class="marquee-item">Design sur-mesure <span class="dot"></span> Sites ultra-rapides <span class="dot"></span> SEO local <span class="dot"></span> Nice · Cannes · Antibes <span class="dot"></span> Accompagnement humain <span class="dot"></span> RGPD &amp; sécurité <span class="dot"></span></span>
             <span class="marquee-item">Design sur-mesure <span class="dot"></span> Sites ultra-rapides <span class="dot"></span> SEO local <span class="dot"></span> Nice · Cannes · Antibes <span class="dot"></span> Accompagnement humain <span class="dot"></span> RGPD &amp; sécurité <span class="dot"></span></span>
@@ -1118,30 +1054,7 @@
         </div>
     </section>
 
-    <!-- TESTIMONIALS -->
-    <section class="testi">
-        <div class="testi-header rv">
-            <p class="testi-tag">Témoignages</p>
-            <h2 class="testi-title">Ils nous font <em>confiance</em></h2>
-        </div>
-        <div class="testi-grid">
-            <div class="testi-card rv">
-                <p class="testi-quote">En trois semaines, notre boulangerie est passée de l'anonymat à la première page Google. Les commandes en ligne ont triplé.</p>
-                <div class="testi-author">Sophie Martin</div>
-                <div class="testi-role">Boulangerie Maison Martin, Nice</div>
-            </div>
-            <div class="testi-card rv rv-d1">
-                <p class="testi-quote">Le site reflète exactement l'esprit de mon atelier. Mes clients me trouvent grâce à Google maintenant — c'est tout ce que je demandais.</p>
-                <div class="testi-author">Marc Dubois</div>
-                <div class="testi-role">Ébéniste d'Art, Antibes</div>
-            </div>
-            <div class="testi-card rv rv-d2">
-                <p class="testi-quote">Professionnel, rapide, un résultat au-dessus de nos attentes. On recommande les yeux fermés.</p>
-                <div class="testi-author">Claire Renaud</div>
-                <div class="testi-role">Fleuriste Les Jardins d'Éden, Cannes</div>
-            </div>
-        </div>
-    </section>
+
 
     <!-- PRICING -->
     <section class="pricing" id="tarifs">
@@ -1325,7 +1238,7 @@
                 requestAnimationFrame(animate);
             })();
 
-            document.querySelectorAll('a, button, .reel-card, .testi-card, .price-card').forEach(function(el) {
+            document.querySelectorAll('a, button, .reel-card, .price-card').forEach(function(el) {
                 el.addEventListener('mouseenter', function() { cursor.classList.add('hovering'); });
                 el.addEventListener('mouseleave', function() { cursor.classList.remove('hovering'); });
             });
@@ -1338,7 +1251,10 @@
             btn.addEventListener('click', function() {
                 btn.classList.toggle('active');
                 overlay.classList.toggle('open');
-                document.body.style.overflow = overlay.classList.contains('open') ? 'hidden' : '';
+                var isOpen = overlay.classList.contains('open');
+                document.body.style.overflow = isOpen ? 'hidden' : '';
+                btn.setAttribute('aria-expanded', isOpen);
+                btn.setAttribute('aria-label', isOpen ? 'Fermer le menu' : 'Ouvrir le menu de navigation');
             });
             overlay.querySelectorAll('.menu-link').forEach(function(link) {
                 link.addEventListener('click', function() {
