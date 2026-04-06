@@ -220,9 +220,29 @@
         }
         .hero-bg {
             position: absolute; inset: 0;
-            background:
-                linear-gradient(to bottom, rgba(0,0,0,0.08) 0%, rgba(0,0,0,0.12) 50%, rgba(0,0,0,0.3) 80%, rgba(10,15,25,0.6) 100%),
-                url('img/hero-nice.jpg') center/cover no-repeat;
+        }
+        .hero-slide {
+            position: absolute; inset: 0;
+            background-size: cover;
+            background-position: center;
+            opacity: 0;
+            animation: heroFade 24s infinite;
+        }
+        .hero-slide:nth-child(1) { background-image: url('img/hero-nice.jpg'); animation-delay: 0s; }
+        .hero-slide:nth-child(2) { background-image: url('img/hero-panorama.jpg'); animation-delay: 6s; }
+        .hero-slide:nth-child(3) { background-image: url('img/hero-vieuxnice.jpg'); animation-delay: 12s; }
+        .hero-slide:nth-child(4) { background-image: url('img/hero-menton.jpg'); animation-delay: 18s; }
+        @keyframes heroFade {
+            0% { opacity: 0; }
+            4% { opacity: 1; }
+            25% { opacity: 1; }
+            29% { opacity: 0; }
+            100% { opacity: 0; }
+        }
+        .hero-overlay {
+            position: absolute; inset: 0;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.08) 0%, rgba(0,0,0,0.12) 50%, rgba(0,0,0,0.3) 80%, rgba(10,15,25,0.6) 100%);
+            z-index: 1;
         }
         .hero-content {
             position: relative; z-index: 2;
@@ -969,7 +989,13 @@
 
     <!-- HERO -->
     <section class="hero" aria-label="Accueil — Studio Azur, création site web artisan Nice">
-        <div class="hero-bg" role="img" aria-label="Place Masséna à Nice, Côte d'Azur"></div>
+        <div class="hero-bg" role="img" aria-label="Photos de la Côte d'Azur : Villefranche-sur-Mer, Nice, Menton">
+            <div class="hero-slide"></div>
+            <div class="hero-slide"></div>
+            <div class="hero-slide"></div>
+            <div class="hero-slide"></div>
+            <div class="hero-overlay"></div>
+        </div>
         <div class="hero-content">
             <div class="hero-tag"><span>Agence web — Côte d'Azur</span></div>
             <h1>
