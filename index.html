@@ -43,8 +43,8 @@
 
         body {
             font-family: var(--sans);
-            background: var(--noir);
-            color: var(--white);
+            background: var(--cream);
+            color: var(--noir);
             line-height: 1.6;
             overflow-x: hidden;
             -webkit-font-smoothing: antialiased;
@@ -74,7 +74,7 @@
             pointer-events: none;
             z-index: 10000;
             opacity: 0.035;
-            mix-blend-mode: overlay;
+            mix-blend-mode: multiply;
             background: url("data:image/svg+xml,%3Csvg width='200' height='200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='f'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23f)' opacity='1'/%3E%3C/svg%3E");
         }
 
@@ -85,7 +85,7 @@
         .loader {
             position: fixed;
             inset: 0;
-            background: var(--noir);
+            background: var(--cream);
             z-index: 9999;
             display: flex;
             align-items: center;
@@ -97,7 +97,7 @@
             font-family: var(--serif);
             font-size: clamp(2rem, 5vw, 4rem);
             font-weight: 300;
-            color: var(--white);
+            color: var(--noir);
             overflow: hidden;
         }
         .loader-text span {
@@ -156,7 +156,7 @@
         .menu-overlay {
             position: fixed;
             inset: 0;
-            background: var(--noir);
+            background: var(--cream);
             z-index: 199;
             display: flex;
             align-items: center;
@@ -176,13 +176,13 @@
             font-family: var(--serif);
             font-size: clamp(2.5rem, 7vw, 6rem);
             font-weight: 300;
-            color: rgba(240,236,228,0.25);
+            color: var(--sand);
             line-height: 1.1;
             letter-spacing: -0.03em;
             transition: color 0.3s;
             display: inline-block;
         }
-        .menu-list a:hover { color: var(--white); }
+        .menu-list a:hover { color: var(--noir); }
         .menu-info {
             position: absolute;
             bottom: clamp(2rem, 5vh, 4rem);
@@ -191,13 +191,13 @@
         }
         .menu-info p {
             font-size: 0.7rem;
-            color: rgba(240,236,228,0.2);
+            color: #8a8a82;
             letter-spacing: 0.1em;
             text-transform: uppercase;
             line-height: 2;
         }
-        .menu-info a { border-bottom: 1px solid rgba(240,236,228,0.1); transition: border-color 0.3s; }
-        .menu-info a:hover { border-color: var(--or); }
+        .menu-info a { border-bottom: 1px solid rgba(0,0,0,0.1); transition: border-color 0.3s; }
+        .menu-info a:hover { border-color: var(--terre); }
 
         /* ═══ HERO ═══ */
         .hero {
@@ -322,7 +322,7 @@
         .reel {
             padding: clamp(6rem, 12vh, 10rem) 0;
             overflow: hidden;
-            background: var(--noir);
+            background: var(--linen);
         }
         .reel-header {
             padding: 0 clamp(1.5rem, 4vw, 4rem);
@@ -334,7 +334,7 @@
         .reel-tag {
             font-size: 0.6rem; font-weight: 600;
             letter-spacing: 0.35em; text-transform: uppercase;
-            color: var(--or);
+            color: var(--terre);
             margin-bottom: 1rem;
         }
         .reel-title {
@@ -343,12 +343,13 @@
             font-weight: 300;
             line-height: 1;
             letter-spacing: -0.03em;
+            color: var(--noir);
         }
-        .reel-title em { font-style: italic; font-weight: 400; color: var(--or-pale); }
+        .reel-title em { font-style: italic; font-weight: 400; }
         .reel-count {
             font-family: var(--serif);
             font-size: clamp(1rem, 2vw, 1.5rem);
-            color: rgba(240,236,228,0.15);
+            color: var(--sand);
             font-weight: 300;
         }
 
@@ -491,9 +492,9 @@
         .marquee {
             padding: clamp(1.5rem, 3vh, 2.5rem) 0;
             overflow: hidden;
-            background: var(--noir);
-            border-top: 1px solid rgba(255,255,255,0.04);
-            border-bottom: 1px solid rgba(255,255,255,0.04);
+            background: var(--cream);
+            border-top: 1px solid rgba(0,0,0,0.04);
+            border-bottom: 1px solid rgba(0,0,0,0.04);
         }
         .marquee-track {
             display: flex;
@@ -506,7 +507,7 @@
             font-size: clamp(1.5rem, 3vw, 3rem);
             font-weight: 300;
             font-style: italic;
-            color: rgba(240,236,228,0.08);
+            color: rgba(0,0,0,0.06);
             white-space: nowrap;
             padding: 0 clamp(1.5rem, 3vw, 3rem);
         }
@@ -523,7 +524,7 @@
         /* ═══ TESTIMONIALS — Staggered ═══ */
         .testi {
             padding: clamp(6rem, 12vh, 10rem) clamp(1.5rem, 4vw, 4rem);
-            background: var(--noir);
+            background: #e9f2f7;
             position: relative;
         }
         .testi-header {
@@ -532,7 +533,7 @@
         .testi-tag {
             font-size: 0.6rem; font-weight: 600;
             letter-spacing: 0.35em; text-transform: uppercase;
-            color: var(--or);
+            color: var(--azur);
             margin-bottom: 1rem;
         }
         .testi-title {
@@ -541,8 +542,9 @@
             font-weight: 300;
             line-height: 1;
             letter-spacing: -0.03em;
+            color: var(--noir);
         }
-        .testi-title em { font-style: italic; font-weight: 400; color: var(--or-pale); }
+        .testi-title em { font-style: italic; font-weight: 400; }
 
         .testi-grid {
             display: grid;
@@ -551,16 +553,15 @@
             max-width: 1400px;
         }
         .testi-card {
-            background: rgba(255,255,255,0.02);
-            border: 1px solid rgba(255,255,255,0.05);
+            background: #fff;
+            border: 1px solid rgba(0,0,0,0.04);
             padding: clamp(2rem, 3vw, 3rem);
             transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
         }
         .testi-card:nth-child(2) { transform: translateY(3rem); }
         .testi-card:hover {
-            background: rgba(255,255,255,0.04);
             transform: translateY(-4px);
-            border-color: rgba(255,255,255,0.1);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.06);
         }
         .testi-card:nth-child(2):hover { transform: translateY(calc(3rem - 4px)); }
         .testi-quote {
@@ -568,21 +569,21 @@
             font-size: clamp(1rem, 1.5vw, 1.25rem);
             font-weight: 300;
             font-style: italic;
-            color: rgba(240,236,228,0.55);
+            color: #5a5a55;
             line-height: 1.75;
             margin-bottom: 2rem;
             position: relative;
             padding-left: 1.5rem;
-            border-left: 2px solid var(--or);
+            border-left: 2px solid var(--azur);
         }
         .testi-author {
             font-size: 0.85rem;
             font-weight: 600;
-            color: var(--white);
+            color: var(--noir);
         }
         .testi-role {
             font-size: 0.65rem;
-            color: rgba(240,236,228,0.25);
+            color: #8a8a82;
             letter-spacing: 0.05em;
             margin-top: 0.2rem;
         }
