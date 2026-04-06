@@ -6,7 +6,7 @@
     <meta http-equiv="X-Content-Type-Options" content="nosniff">
     <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
     <meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=()">
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; script-src 'self' 'unsafe-inline'; connect-src 'self' https://formsubmit.co; form-action 'self' https://formsubmit.co; img-src 'self' data: https://images.unsplash.com;">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; script-src 'self' 'unsafe-inline'; connect-src 'self' https://formsubmit.co; form-action 'self' https://formsubmit.co; img-src 'self' data:;">
     <title>Studio Azur — Création site web artisan Nice | Agence web Côte d'Azur</title>
     <meta name="description" content="Création site web artisan Nice — Sites internet sur-mesure pour artisans, commerces et indépendants à Nice, Cannes, Antibes. Design premium, SEO local, livraison 7 jours. Studio Azur, agence web Côte d'Azur.">
     <meta property="og:title" content="Studio Azur — Création site web artisan Nice | Agence web Côte d'Azur">
@@ -44,7 +44,7 @@
             --sans: 'Inter', system-ui, sans-serif;
         }
 
-        html { scroll-behavior: smooth; }
+        html { scroll-behavior: smooth; overflow-x: hidden; }
 
         body {
             font-family: var(--sans);
@@ -219,26 +219,33 @@
             position: absolute; inset: 0;
             background:
                 linear-gradient(to bottom, rgba(0,0,0,0.25) 0%, rgba(0,0,0,0.3) 40%, rgba(0,0,0,0.5) 80%, rgba(30,25,20,0.85) 100%),
-                url('https://images.unsplash.com/photo-1533104816931-20fa691ff6ca?w=1920&q=80&auto=format') center/cover no-repeat;
+                url('img/hero-bg.jpg') center/cover no-repeat;
         }
         .hero-content {
             position: relative; z-index: 2;
             padding: 0 clamp(1.5rem, 4vw, 4rem) clamp(3rem, 8vh, 6rem);
+            max-width: 1800px;
+            margin: 0 auto;
+            width: 100%;
         }
         .hero-tag {
             font-size: 0.6rem;
-            font-weight: 600;
+            font-weight: 700;
             letter-spacing: 0.35em;
             text-transform: uppercase;
             color: var(--or);
             margin-bottom: 2rem;
             overflow: hidden;
-            text-shadow: 0 2px 30px rgba(0,0,0,0.6), 0 1px 5px rgba(0,0,0,0.4);
+            text-shadow: 0 2px 30px rgba(0,0,0,0.8), 0 1px 5px rgba(0,0,0,0.5);
         }
         .hero-tag span {
             display: inline-block;
             transform: translateY(100%);
             animation: slideUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 1.2s forwards;
+            background: rgba(0,0,0,0.35);
+            padding: 0.35em 0.8em;
+            border-radius: 3px;
+            backdrop-filter: blur(4px);
         }
         @keyframes slideUp {
             to { transform: translateY(0); }
@@ -685,7 +692,7 @@
             position: absolute; inset: 0;
             background:
                 linear-gradient(180deg, rgba(255,255,255,0.1) 0%, rgba(26,82,118,0.25) 100%),
-                url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=1200&q=80&auto=format') center/cover;
+                url('img/contact-bg.jpg') center/cover;
         }
         .contact-left-content {
             position: relative; z-index: 2;
@@ -998,7 +1005,7 @@
         </div>
         <div class="reel-track" id="reelTrack">
             <div class="reel-card rv">
-                <div class="reel-card-img" role="img" aria-label="Création de site vitrine pour artisan" style="background-image:url('https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&q=80&auto=format')"></div>
+                <div class="reel-card-img" role="img" aria-label="Création de site vitrine pour artisan" style="background-image:url('img/service-vitrine.jpg')"></div>
                 <div class="reel-card-overlay"></div>
                 <div class="reel-card-content">
                     <div class="reel-card-num">01</div>
@@ -1007,7 +1014,7 @@
                 </div>
             </div>
             <div class="reel-card rv rv-d1">
-                <div class="reel-card-img" role="img" aria-label="Stratégie SEO local pour visibilité Google" style="background-image:url('https://images.unsplash.com/photo-1432888498266-38ffec3eaf0a?w=800&q=80&auto=format')"></div>
+                <div class="reel-card-img" role="img" aria-label="Stratégie SEO local pour visibilité Google" style="background-image:url('img/service-seo.jpg')"></div>
                 <div class="reel-card-overlay"></div>
                 <div class="reel-card-content">
                     <div class="reel-card-num">02</div>
@@ -1016,7 +1023,7 @@
                 </div>
             </div>
             <div class="reel-card rv rv-d2">
-                <div class="reel-card-img" role="img" aria-label="Création d'identité visuelle" style="background-image:url('https://images.unsplash.com/photo-1558655146-9f40138edfeb?w=800&q=80&auto=format')"></div>
+                <div class="reel-card-img" role="img" aria-label="Création d'identité visuelle" style="background-image:url('img/service-identite.jpg')"></div>
                 <div class="reel-card-overlay"></div>
                 <div class="reel-card-content">
                     <div class="reel-card-num">03</div>
@@ -1025,7 +1032,7 @@
                 </div>
             </div>
             <div class="reel-card rv rv-d3">
-                <div class="reel-card-img" role="img" aria-label="Automatisation business pour artisans" style="background-image:url('https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?w=800&q=80&auto=format')"></div>
+                <div class="reel-card-img" role="img" aria-label="Automatisation business pour artisans" style="background-image:url('img/service-auto.jpg')"></div>
                 <div class="reel-card-overlay"></div>
                 <div class="reel-card-content">
                     <div class="reel-card-num">04</div>
@@ -1035,7 +1042,7 @@
                 <div class="reel-card-tag">Bientôt</div>
             </div>
             <div class="reel-card rv">
-                <div class="reel-card-img" role="img" aria-label="Solutions IA et assistant virtuel" style="background-image:url('https://images.unsplash.com/photo-1677442136019-21780ecad995?w=800&q=80&auto=format')"></div>
+                <div class="reel-card-img" role="img" aria-label="Solutions IA et assistant virtuel" style="background-image:url('img/service-ia.jpg')"></div>
                 <div class="reel-card-overlay"></div>
                 <div class="reel-card-content">
                     <div class="reel-card-num">05</div>
@@ -1050,7 +1057,7 @@
     <!-- SHOWCASE — Split -->
     <section class="showcase" id="approche" aria-label="Notre approche sur-mesure">
         <div class="showcase-visual rv">
-            <div class="showcase-img" role="img" aria-label="Espace de travail créatif pour la conception web" style="background-image:url('https://images.unsplash.com/photo-1499750310107-5fef28a66643?w=1200&q=80&auto=format')"></div>
+            <div class="showcase-img" role="img" aria-label="Espace de travail créatif pour la conception web" style="background-image:url('img/showcase-approche.jpg')"></div>
         </div>
         <div class="showcase-text">
             <div class="rv">
