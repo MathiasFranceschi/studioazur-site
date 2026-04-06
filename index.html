@@ -218,7 +218,7 @@
         .hero-bg {
             position: absolute; inset: 0;
             background:
-                linear-gradient(180deg, rgba(10,15,26,0.3) 0%, rgba(10,15,26,0.1) 40%, rgba(10,15,26,0.5) 80%, rgba(30,25,20,0.85) 100%),
+                linear-gradient(to bottom, rgba(0,0,0,0.25) 0%, rgba(0,0,0,0.3) 40%, rgba(0,0,0,0.5) 80%, rgba(30,25,20,0.85) 100%),
                 url('https://images.unsplash.com/photo-1533104816931-20fa691ff6ca?w=1920&q=80&auto=format') center/cover no-repeat;
         }
         .hero-content {
@@ -233,6 +233,7 @@
             color: var(--or);
             margin-bottom: 2rem;
             overflow: hidden;
+            text-shadow: 0 2px 30px rgba(0,0,0,0.6), 0 1px 5px rgba(0,0,0,0.4);
         }
         .hero-tag span {
             display: inline-block;
@@ -251,6 +252,7 @@
             letter-spacing: -0.04em;
             color: var(--white);
             max-width: 90vw;
+            text-shadow: 0 2px 30px rgba(0,0,0,0.6), 0 1px 5px rgba(0,0,0,0.4);
         }
         .hero h1 .line {
             display: block;
@@ -290,6 +292,7 @@
             color: var(--white);
             padding: 1.2rem 0;
             position: relative;
+            text-shadow: 0 2px 30px rgba(0,0,0,0.6), 0 1px 5px rgba(0,0,0,0.4);
         }
         .hero-cta::after {
             content: '';
@@ -310,7 +313,8 @@
             font-weight: 600;
             letter-spacing: 0.3em;
             text-transform: uppercase;
-            color: rgba(255,255,255,0.3);
+            color: rgba(255,255,255,0.5);
+            text-shadow: 0 1px 10px rgba(0,0,0,0.4);
             writing-mode: vertical-lr;
             display: flex; align-items: center; gap: 1rem;
         }
@@ -647,12 +651,12 @@
             font-size: 0.72rem; font-weight: 600;
             letter-spacing: 0.1em; text-transform: uppercase;
             text-decoration: none; border: none; cursor: none;
-            background: var(--terre);
-            color: var(--white);
+            background: #a5522e;
+            color: #ffffff;
             padding: 1.1rem 2rem;
             transition: all 0.35s;
         }
-        .btn-solid:hover { background: var(--terre-light); }
+        .btn-solid:hover { background: var(--terre); }
         .btn-ghost {
             display: flex; align-items: center; justify-content: center;
             font-family: var(--sans);
@@ -759,7 +763,7 @@
             display: block;
             font-size: 0.55rem; font-weight: 700;
             letter-spacing: 0.2em; text-transform: uppercase;
-            color: #8a9aaa;
+            color: #5a6a7a;
             margin-bottom: 0.6rem;
         }
         .form-group input,
@@ -785,7 +789,7 @@
         }
         .form-group input::placeholder,
         .form-group textarea::placeholder { color: #b0bec5; }
-        .form-group select { color: #78909c; }
+        .form-group select { color: #4a6070; }
         .form-group select option { background: #f4f8fa; color: var(--noir); }
         .form-group textarea { resize: vertical; min-height: 100px; }
         .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
@@ -819,13 +823,13 @@
         .footer-links a {
             font-size: 0.65rem; font-weight: 500;
             letter-spacing: 0.1em; text-transform: uppercase;
-            color: #8a8a82;
+            color: #5a5a52;
             transition: color 0.3s;
         }
         .footer-links a:hover { color: var(--terre); }
         .footer-copy {
             font-size: 0.6rem;
-            color: #b0a89c;
+            color: #636058;
             letter-spacing: 0.05em;
         }
         .footer-social {
@@ -1206,9 +1210,11 @@
                     Envoyer
                     <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
                 </button>
-                <div id="contactSuccess" style="display:none;text-align:center;padding:2rem 0;">
-                    <div style="font-family:var(--serif);font-size:1.5rem;color:var(--noir);margin-bottom:.5rem;">Merci !</div>
-                    <div style="font-size:.85rem;color:#5a7a8a;">Votre message a bien été envoyé. Nous vous répondons sous 24h.</div>
+                <div id="contactSuccess" style="display:none;text-align:center;padding:3rem 1rem;">
+                    <svg width="56" height="56" viewBox="0 0 56 56" fill="none" style="margin-bottom:1.5rem;"><circle cx="28" cy="28" r="27" stroke="#c9a84c" stroke-width="2" fill="none"/><path d="M17 28l7 7 15-15" stroke="#2d8f5e" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    <div style="font-family:var(--serif);font-size:1.8rem;color:var(--noir);margin-bottom:.75rem;">Merci !</div>
+                    <div style="font-size:.9rem;color:#5a7a8a;line-height:1.7;max-width:360px;margin:0 auto 2rem;">Votre message a bien été envoyé.<br>Nous vous répondons sous 24 heures.</div>
+                    <button type="button" id="contactReset" class="btn-ghost" style="margin:0 auto;">Envoyer un autre message</button>
                 </div>
             </form>
         </div>
@@ -1335,11 +1341,13 @@
 
         // Contact form — FormSubmit.co
         var contactForm = document.getElementById('contactForm');
+        var contactSuccess = document.getElementById('contactSuccess');
+        var contactSubmitBtn = document.getElementById('contactSubmit');
+        var submitBtnOriginal = contactSubmitBtn.cloneNode(true);
         contactForm.addEventListener('submit', function(e) {
             e.preventDefault();
-            var btn = document.getElementById('contactSubmit');
-            btn.textContent = 'Envoi en cours...';
-            btn.disabled = true;
+            contactSubmitBtn.textContent = 'Envoi en cours...';
+            contactSubmitBtn.disabled = true;
             fetch(contactForm.action, {
                 method: 'POST',
                 body: new FormData(contactForm),
@@ -1348,16 +1356,24 @@
                 return r.json().then(function(data) {
                     if (data.success === 'true' || data.success === true) {
                         contactForm.style.display = 'none';
-                        document.getElementById('contactSuccess').style.display = 'block';
+                        contactSuccess.style.display = 'block';
                     } else {
-                        btn.textContent = data.message || 'Erreur — Réessayer';
-                        btn.disabled = false;
+                        contactSubmitBtn.textContent = data.message || 'Erreur — Réessayer';
+                        contactSubmitBtn.disabled = false;
                     }
                 });
             }).catch(function() {
-                btn.textContent = 'Erreur réseau — Réessayer';
-                btn.disabled = false;
+                contactSubmitBtn.textContent = 'Erreur réseau — Réessayer';
+                contactSubmitBtn.disabled = false;
             });
+        });
+        document.getElementById('contactReset').addEventListener('click', function() {
+            contactForm.reset();
+            contactForm.style.display = '';
+            contactSuccess.style.display = 'none';
+            var newBtn = submitBtnOriginal.cloneNode(true);
+            contactSubmitBtn.parentNode.replaceChild(newBtn, contactSubmitBtn);
+            contactSubmitBtn = newBtn;
         });
     </script>
 </body>
