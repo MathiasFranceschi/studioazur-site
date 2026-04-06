@@ -6,18 +6,18 @@
     <meta http-equiv="X-Content-Type-Options" content="nosniff">
     <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
     <meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=()">
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; script-src 'self' 'unsafe-inline'; connect-src 'self'; form-action 'self'; img-src 'self' data: https://images.unsplash.com;">
-    <title>Studio Azur — Création de sites web pour artisans | Nice, Côte d'Azur</title>
-    <meta name="description" content="Création de sites web sur-mesure pour artisans et commerces de proximité à Nice, Cannes, Antibes. Design premium, SEO local, résultats concrets. Studio Azur, agence web Côte d'Azur.">
-    <meta property="og:title" content="Studio Azur — Création de sites web pour artisans | Côte d'Azur">
-    <meta property="og:description" content="Sites web sur-mesure pour artisans et commerces de la Côte d'Azur. Design premium, SEO local, résultats concrets.">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; script-src 'self' 'unsafe-inline'; connect-src 'self' https://formsubmit.co; form-action 'self' https://formsubmit.co; img-src 'self' data: https://images.unsplash.com;">
+    <title>Studio Azur — Création site web artisan Nice | Agence web Côte d'Azur</title>
+    <meta name="description" content="Création site web artisan Nice — Sites internet sur-mesure pour artisans, commerces et indépendants à Nice, Cannes, Antibes. Design premium, SEO local, livraison 7 jours. Studio Azur, agence web Côte d'Azur.">
+    <meta property="og:title" content="Studio Azur — Création site web artisan Nice | Agence web Côte d'Azur">
+    <meta property="og:description" content="Création site web artisan Nice — Sites internet sur-mesure pour artisans et commerces. Design premium, SEO local, livraison 7 jours.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://studioazur.dev">
     <meta property="og:locale" content="fr_FR">
     <meta property="og:site_name" content="Studio Azur">
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Studio Azur — Création de sites web pour artisans | Côte d'Azur">
-    <meta name="twitter:description" content="Sites web sur-mesure pour artisans et commerces de la Côte d'Azur. Design premium, SEO local, résultats concrets.">
+    <meta name="twitter:title" content="Studio Azur — Création site web artisan Nice | Agence web Côte d'Azur">
+    <meta name="twitter:description" content="Création site web artisan Nice — Sites internet sur-mesure pour artisans et commerces. Design premium, SEO local, livraison 7 jours.">
     <meta name="theme-color" content="#f8f5f0">
     <link rel="canonical" href="https://studioazur.dev">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -85,6 +85,8 @@
 
         ::selection { background: var(--or); color: var(--noir); }
         a { color: inherit; text-decoration: none; }
+
+        .skip-link:focus { position:fixed!important; left:1rem!important; top:1rem!important; width:auto!important; height:auto!important; overflow:visible!important; z-index:10001; }
 
         /* ═══ LOADER ═══ */
         .loader {
@@ -410,10 +412,11 @@
             font-weight: 400;
             margin-bottom: 0.5rem;
             line-height: 1.2;
+            color: var(--white);
         }
         .reel-card p {
             font-size: 0.75rem;
-            color: rgba(240,236,228,0.4);
+            color: rgba(240,236,228,0.7);
             line-height: 1.7;
         }
         .reel-card-tag {
@@ -581,9 +584,9 @@
         }
         .price-card:hover { background: #fff; }
         .price-card.feat {
-            background: #1a6b8a;
-            color: var(--white);
-            border-color: transparent;
+            background: #e9f2f7;
+            color: var(--noir);
+            border-color: rgba(41,128,185,0.15);
             position: relative;
             margin: -2rem 0;
             padding: clamp(3rem, 4vw, 4rem) clamp(2rem, 3vw, 3rem);
@@ -593,7 +596,7 @@
             content: '';
             position: absolute; top: 0; left: 0; right: 0;
             height: 3px;
-            background: linear-gradient(90deg, var(--terre), var(--or));
+            background: linear-gradient(90deg, var(--azur), var(--terre));
         }
         .price-badge {
             font-size: 0.5rem; font-weight: 700;
@@ -607,7 +610,7 @@
             color: #8a8a82;
             margin-bottom: 1rem;
         }
-        .price-card.feat .price-name { color: rgba(255,255,255,0.3); }
+        .price-card.feat .price-name { color: #8a8a82; }
         .price-amount {
             font-family: var(--serif);
             font-size: clamp(3rem, 5vw, 4rem);
@@ -622,7 +625,7 @@
             padding-bottom: 2rem;
             border-bottom: 1px solid rgba(0,0,0,0.06);
         }
-        .price-card.feat .price-note { color: rgba(255,255,255,0.25); border-color: rgba(255,255,255,0.08); }
+        .price-card.feat .price-note { color: #8a8a82; border-color: rgba(0,0,0,0.06); }
         .price-features {
             list-style: none;
             display: flex; flex-direction: column; gap: 0.8rem;
@@ -634,9 +637,9 @@
             color: #5a5a55;
             display: flex; align-items: baseline; gap: 0.7rem;
         }
-        .price-card.feat .price-features li { color: rgba(255,255,255,0.45); }
+        .price-card.feat .price-features li { color: #5a5a55; }
         .price-check { color: var(--terre); font-size: 0.75rem; flex-shrink: 0; }
-        .price-card.feat .price-check { color: var(--or); }
+        .price-card.feat .price-check { color: var(--terre); }
 
         .btn-solid {
             display: flex; align-items: center; justify-content: center; gap: 0.5rem;
@@ -825,6 +828,17 @@
             color: #b0a89c;
             letter-spacing: 0.05em;
         }
+        .footer-social {
+            display: flex; gap: 1rem; align-items: center;
+        }
+        .footer-social a {
+            display: flex; align-items: center; justify-content: center;
+            width: 32px; height: 32px;
+            border: 1px solid rgba(0,0,0,0.08);
+            color: #8a8a82;
+            transition: color 0.3s, border-color 0.3s;
+        }
+        .footer-social a:hover { color: var(--terre); border-color: var(--terre); }
 
         /* ═══ REVEAL ═══ */
         .rv {
@@ -894,6 +908,9 @@
 </head>
 <body>
 
+    <!-- SKIP TO CONTENT -->
+    <a href="#services" class="skip-link" style="position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden;z-index:10001;background:var(--terre);color:#fff;padding:1rem 2rem;font-size:0.9rem;">Aller au contenu principal</a>
+
     <!-- LOADER -->
     <div class="loader" id="loader">
         <div class="loader-text">
@@ -937,8 +954,8 @@
     </div>
 
     <!-- HERO -->
-    <section class="hero">
-        <div class="hero-bg"></div>
+    <section class="hero" aria-label="Accueil — Studio Azur, création site web artisan Nice">
+        <div class="hero-bg" role="img" aria-label="Vue panoramique de la Côte d'Azur"></div>
         <div class="hero-content">
             <div class="hero-tag"><span>Agence web — Côte d'Azur</span></div>
             <h1>
@@ -967,7 +984,7 @@
     </div>
 
     <!-- SERVICES REEL -->
-    <section class="reel" id="services">
+    <section class="reel" id="services" aria-label="Nos services de création web">
         <div class="reel-header rv">
             <div>
                 <p class="reel-tag">Nos services</p>
@@ -977,7 +994,7 @@
         </div>
         <div class="reel-track" id="reelTrack">
             <div class="reel-card rv">
-                <div class="reel-card-img" style="background-image:url('https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&q=80&auto=format')"></div>
+                <div class="reel-card-img" role="img" aria-label="Création de site vitrine pour artisan" style="background-image:url('https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&q=80&auto=format')"></div>
                 <div class="reel-card-overlay"></div>
                 <div class="reel-card-content">
                     <div class="reel-card-num">01</div>
@@ -986,7 +1003,7 @@
                 </div>
             </div>
             <div class="reel-card rv rv-d1">
-                <div class="reel-card-img" style="background-image:url('https://images.unsplash.com/photo-1432888498266-38ffec3eaf0a?w=800&q=80&auto=format')"></div>
+                <div class="reel-card-img" role="img" aria-label="Stratégie SEO local pour visibilité Google" style="background-image:url('https://images.unsplash.com/photo-1432888498266-38ffec3eaf0a?w=800&q=80&auto=format')"></div>
                 <div class="reel-card-overlay"></div>
                 <div class="reel-card-content">
                     <div class="reel-card-num">02</div>
@@ -995,7 +1012,7 @@
                 </div>
             </div>
             <div class="reel-card rv rv-d2">
-                <div class="reel-card-img" style="background-image:url('https://images.unsplash.com/photo-1558655146-9f40138edfeb?w=800&q=80&auto=format')"></div>
+                <div class="reel-card-img" role="img" aria-label="Création d'identité visuelle" style="background-image:url('https://images.unsplash.com/photo-1558655146-9f40138edfeb?w=800&q=80&auto=format')"></div>
                 <div class="reel-card-overlay"></div>
                 <div class="reel-card-content">
                     <div class="reel-card-num">03</div>
@@ -1004,7 +1021,7 @@
                 </div>
             </div>
             <div class="reel-card rv rv-d3">
-                <div class="reel-card-img" style="background-image:url('https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?w=800&q=80&auto=format')"></div>
+                <div class="reel-card-img" role="img" aria-label="Automatisation business pour artisans" style="background-image:url('https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?w=800&q=80&auto=format')"></div>
                 <div class="reel-card-overlay"></div>
                 <div class="reel-card-content">
                     <div class="reel-card-num">04</div>
@@ -1014,7 +1031,7 @@
                 <div class="reel-card-tag">Bientôt</div>
             </div>
             <div class="reel-card rv">
-                <div class="reel-card-img" style="background-image:url('https://images.unsplash.com/photo-1677442136019-21780ecad995?w=800&q=80&auto=format')"></div>
+                <div class="reel-card-img" role="img" aria-label="Solutions IA et assistant virtuel" style="background-image:url('https://images.unsplash.com/photo-1677442136019-21780ecad995?w=800&q=80&auto=format')"></div>
                 <div class="reel-card-overlay"></div>
                 <div class="reel-card-content">
                     <div class="reel-card-num">05</div>
@@ -1027,9 +1044,9 @@
     </section>
 
     <!-- SHOWCASE — Split -->
-    <section class="showcase" id="approche">
+    <section class="showcase" id="approche" aria-label="Notre approche sur-mesure">
         <div class="showcase-visual rv">
-            <div class="showcase-img" style="background-image:url('https://images.unsplash.com/photo-1499750310107-5fef28a66643?w=1200&q=80&auto=format')"></div>
+            <div class="showcase-img" role="img" aria-label="Espace de travail créatif pour la conception web" style="background-image:url('https://images.unsplash.com/photo-1499750310107-5fef28a66643?w=1200&q=80&auto=format')"></div>
         </div>
         <div class="showcase-text">
             <div class="rv">
@@ -1057,7 +1074,7 @@
 
 
     <!-- PRICING -->
-    <section class="pricing" id="tarifs">
+    <section class="pricing" id="tarifs" aria-label="Tarifs création site web">
         <div class="pricing-header rv">
             <div>
                 <p class="pricing-tag">Tarifs</p>
@@ -1115,9 +1132,9 @@
     </section>
 
     <!-- CONTACT -->
-    <section class="contact" id="contact">
+    <section class="contact" id="contact" aria-label="Formulaire de contact">
         <div class="contact-left">
-            <div class="contact-left-img"></div>
+            <div class="contact-left-img" role="img" aria-label="Plage de la Côte d'Azur"></div>
             <div class="contact-left-content rv">
                 <p class="contact-tag">Contact</p>
                 <h2 class="contact-title">Parlons de votre <em>projet</em></h2>
@@ -1153,8 +1170,11 @@
             </div>
         </div>
         <div class="contact-right">
-            <form class="contact-form" id="contactForm" action="/api/contact" method="POST">
+            <form class="contact-form" id="contactForm" action="https://formsubmit.co/ajax/contact@studioazur.dev" method="POST">
                 <input type="text" name="_gotcha" style="display:none!important" tabindex="-1" autocomplete="off">
+                <input type="hidden" name="_captcha" value="false">
+                <input type="hidden" name="_subject" value="Nouveau contact — Studio Azur">
+                <input type="hidden" name="_template" value="table">
                 <div class="contact-form-heading">Écrivez-nous</div>
                 <div class="form-row">
                     <div class="form-group">
@@ -1195,7 +1215,7 @@
     </section>
 
     <!-- FOOTER -->
-    <footer>
+    <footer role="contentinfo">
         <div class="footer-inner">
             <div class="footer-left">
                 <span class="footer-logo">Studio Azur</span>
@@ -1206,6 +1226,11 @@
                     <li><a href="#tarifs">Tarifs</a></li>
                     <li><a href="#contact">Contact</a></li>
                 </ul>
+            </div>
+            <div class="footer-social" aria-label="Réseaux sociaux">
+                <a href="https://www.facebook.com/profile.php?id=61573485571631" target="_blank" rel="noopener" aria-label="Facebook"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3V2z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+                <a href="https://www.linkedin.com/in/mathias-franceschi-607379401/" target="_blank" rel="noopener" aria-label="LinkedIn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><rect x="2" y="9" width="4" height="12" stroke="currentColor" stroke-width="1.5"/><circle cx="4" cy="4" r="2" stroke="currentColor" stroke-width="1.5"/></svg></a>
+                <a href="https://www.instagram.com/studioazur0" target="_blank" rel="noopener" aria-label="Instagram"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><rect x="2" y="2" width="20" height="20" rx="5" stroke="currentColor" stroke-width="1.5"/><circle cx="12" cy="12" r="5" stroke="currentColor" stroke-width="1.5"/><circle cx="17.5" cy="6.5" r="1.5" fill="currentColor"/></svg></a>
             </div>
             <p class="footer-copy">&copy; 2026 Studio Azur. Côte d'Azur, France.</p>
         </div>
@@ -1308,7 +1333,7 @@
             });
         });
 
-        // Contact form — Cloudflare Pages Function
+        // Contact form — FormSubmit.co
         var contactForm = document.getElementById('contactForm');
         contactForm.addEventListener('submit', function(e) {
             e.preventDefault();
@@ -1321,11 +1346,11 @@
                 headers: { 'Accept': 'application/json' }
             }).then(function(r) {
                 return r.json().then(function(data) {
-                    if (r.ok && data.ok) {
+                    if (data.success === 'true' || data.success === true) {
                         contactForm.style.display = 'none';
                         document.getElementById('contactSuccess').style.display = 'block';
                     } else {
-                        btn.textContent = data.error || 'Erreur — Réessayer';
+                        btn.textContent = data.message || 'Erreur — Réessayer';
                         btn.disabled = false;
                     }
                 });
