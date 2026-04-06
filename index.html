@@ -728,7 +728,7 @@
             min-height: 100vh;
             display: grid;
             grid-template-columns: 1fr 1fr;
-            background: var(--noir);
+            background: #e9f2f7;
         }
         .contact-left {
             position: relative;
@@ -737,8 +737,8 @@
         .contact-left-img {
             position: absolute; inset: 0;
             background:
-                linear-gradient(180deg, rgba(10,15,26,0.4), rgba(10,15,26,0.8)),
-                url('https://images.unsplash.com/photo-1555400038-63f5ba517a47?w=1200&q=80&auto=format') center/cover;
+                linear-gradient(180deg, rgba(255,255,255,0.1) 0%, rgba(26,82,118,0.25) 100%),
+                url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=1200&q=80&auto=format') center/cover;
         }
         .contact-left-content {
             position: relative; z-index: 2;
@@ -751,7 +751,7 @@
         .contact-tag {
             font-size: 0.6rem; font-weight: 600;
             letter-spacing: 0.35em; text-transform: uppercase;
-            color: var(--or);
+            color: var(--terre);
             margin-bottom: 1.5rem;
         }
         .contact-title {
@@ -761,38 +761,44 @@
             line-height: 1;
             letter-spacing: -0.03em;
             margin-bottom: 2rem;
+            color: var(--white);
+            text-shadow: 0 2px 20px rgba(0,0,0,0.15);
         }
         .contact-title em { font-style: italic; font-weight: 400; color: var(--or-pale); }
         .contact-info {
             display: flex; flex-direction: column; gap: 1.2rem;
             padding-top: 2rem;
-            border-top: 1px solid rgba(255,255,255,0.08);
+            border-top: 1px solid rgba(255,255,255,0.3);
         }
         .contact-info-item {
             display: flex; align-items: center; gap: 1rem;
         }
         .contact-info-icon {
             width: 36px; height: 36px;
-            border: 1px solid rgba(255,255,255,0.08);
+            border: 1px solid rgba(255,255,255,0.3);
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(8px);
             display: flex; align-items: center; justify-content: center;
             flex-shrink: 0;
         }
         .contact-info-label {
             font-size: 0.55rem; font-weight: 600;
             letter-spacing: 0.2em; text-transform: uppercase;
-            color: rgba(240,236,228,0.25);
+            color: rgba(255,255,255,0.6);
+            text-shadow: 0 1px 4px rgba(0,0,0,0.1);
         }
         .contact-info-value {
             font-size: 0.88rem;
-            color: rgba(240,236,228,0.6);
+            color: var(--white);
+            text-shadow: 0 1px 4px rgba(0,0,0,0.1);
         }
-        .contact-info-value a { border-bottom: 1px solid rgba(240,236,228,0.1); transition: border-color 0.3s; }
+        .contact-info-value a { border-bottom: 1px solid rgba(255,255,255,0.3); transition: border-color 0.3s; }
         .contact-info-value a:hover { border-color: var(--or); }
 
         .contact-right {
             display: flex; align-items: center; justify-content: center;
             padding: clamp(3rem, 5vw, 5rem);
-            background: var(--deep);
+            background: #f4f8fa;
         }
         .contact-form {
             width: 100%;
@@ -803,14 +809,14 @@
             font-size: 1.5rem;
             font-weight: 300;
             margin-bottom: 2.5rem;
-            color: var(--white);
+            color: var(--noir);
         }
         .form-group { margin-bottom: 1.5rem; }
         .form-group label {
             display: block;
             font-size: 0.55rem; font-weight: 700;
             letter-spacing: 0.2em; text-transform: uppercase;
-            color: rgba(240,236,228,0.3);
+            color: #8a9aaa;
             margin-bottom: 0.6rem;
         }
         .form-group input,
@@ -821,9 +827,9 @@
             font-family: var(--sans);
             font-size: 0.9rem;
             border: none;
-            border-bottom: 1px solid rgba(255,255,255,0.08);
+            border-bottom: 1px solid rgba(0,0,0,0.1);
             background: transparent;
-            color: var(--white);
+            color: var(--noir);
             outline: none;
             transition: border-color 0.3s;
             -webkit-appearance: none;
@@ -832,12 +838,12 @@
         .form-group input:focus,
         .form-group textarea:focus,
         .form-group select:focus {
-            border-color: var(--or);
+            border-color: var(--azur);
         }
         .form-group input::placeholder,
-        .form-group textarea::placeholder { color: rgba(240,236,228,0.15); }
-        .form-group select { color: rgba(240,236,228,0.4); }
-        .form-group select option { background: var(--deep); color: var(--white); }
+        .form-group textarea::placeholder { color: #b0bec5; }
+        .form-group select { color: #78909c; }
+        .form-group select option { background: #f4f8fa; color: var(--noir); }
         .form-group textarea { resize: vertical; min-height: 100px; }
         .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
         .contact-form .btn-solid { width: 100%; margin-top: 1rem; }
@@ -1267,8 +1273,8 @@
                     <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
                 </button>
                 <div id="contactSuccess" style="display:none;text-align:center;padding:2rem 0;">
-                    <div style="font-family:var(--serif);font-size:1.5rem;color:var(--white);margin-bottom:.5rem;">Merci !</div>
-                    <div style="font-size:.85rem;color:rgba(240,236,228,0.4);">Votre message a bien été envoyé. Nous vous répondons sous 24h.</div>
+                    <div style="font-family:var(--serif);font-size:1.5rem;color:var(--noir);margin-bottom:.5rem;">Merci !</div>
+                    <div style="font-size:.85rem;color:#5a7a8a;">Votre message a bien été envoyé. Nous vous répondons sous 24h.</div>
                 </div>
             </form>
         </div>
