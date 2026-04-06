@@ -124,10 +124,16 @@
                 <span class="line"><span class="line-inner"><em>à la hauteur</em></span></span>
             </h1>
             <div class="hero-bottom">
+                <div style="display:flex;gap:1.5rem;align-items:center;flex-wrap:wrap">
                 <a href="#contact" class="hero-cta">
                     Demander un devis gratuit
                     <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
                 </a>
+                <a href="preview.html" class="hero-cta" style="color:var(--or-pale);opacity:0.8">
+                    Voir la démo
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </a>
+                </div>
                 <div class="hero-scroll">
                     Scroll
                 </div>
@@ -180,7 +186,7 @@
                     <p>Maintenance, sauvegardes, site sécurisé, support réactif. Tranquillité totale.</p>
                 </div>
             </div>
-            <div class="reel-card rv rv-d3">
+            <a href="automation.html" class="reel-card rv rv-d3" style="text-decoration:none;color:inherit">
                 <div class="reel-card-img" role="img" aria-label="Automatisation business pour artisans" style="background-image:url('img/service-auto.webp')"></div>
                 <div class="reel-card-overlay"></div>
                 <div class="reel-card-content">
@@ -188,8 +194,8 @@
                     <h3>Automatisation</h3>
                     <p>Réseaux sociaux, emails, formulaires intelligents. Votre site travaille pour vous.</p>
                 </div>
-            </div>
-            <div class="reel-card rv">
+            </a>
+            <a href="preview.html" class="reel-card rv" style="text-decoration:none;color:inherit">
                 <div class="reel-card-img" role="img" aria-label="Solutions IA et assistant virtuel" style="background-image:url('img/service-ia.webp')"></div>
                 <div class="reel-card-overlay"></div>
                 <div class="reel-card-content">
@@ -197,9 +203,15 @@
                     <h3>Solutions IA</h3>
                     <p>Assistant dédié. Réponses automatiques. Prospection 24/7.</p>
                 </div>
-            </div>
+            </a>
         </div>
     </section>
+
+    <!-- CTA BAR -->
+    <div class="rv" style="padding:clamp(2rem,4vh,3rem) clamp(1.5rem,4vw,4rem);background:var(--cream);display:flex;justify-content:center;gap:clamp(1rem,2vw,2rem);flex-wrap:wrap">
+        <a href="automation.html" style="display:inline-flex;align-items:center;gap:0.5rem;font-family:var(--sans);font-size:0.75rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;text-decoration:none;padding:1rem 2rem;background:#2e86ab;color:#fff;transition:background 0.3s">Découvrir l'automatisation <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        <a href="preview.html" style="display:inline-flex;align-items:center;gap:0.5rem;font-family:var(--sans);font-size:0.75rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;text-decoration:none;padding:1rem 2rem;border:1px solid rgba(0,0,0,0.12);color:var(--noir);transition:all 0.3s">Voir la démo en direct <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+    </div>
 
     <!-- SHOWCASE — Split -->
     <section class="showcase" id="approche" aria-label="Notre approche sur-mesure">
