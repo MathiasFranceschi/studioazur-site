@@ -492,6 +492,13 @@
                 var x = e.pageX - track.offsetLeft;
                 track.scrollLeft = scrollLeft - (x - startX) * 0.8;
             });
+            // Wheel to horizontal scroll
+            track.addEventListener('wheel', function(e) {
+                if (Math.abs(e.deltaY) > Math.abs(e.deltaX)) {
+                    e.preventDefault();
+                    track.scrollLeft += e.deltaY * 1.2;
+                }
+            }, { passive: false });
         })();
 
         // Plan pre-selection

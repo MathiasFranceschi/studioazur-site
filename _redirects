@@ -1,4 +1,6 @@
 https://www.studioazur.dev/* https://studioazur.dev/:splat 301
 /index.html / 301
+/preview /preview.html 200
 /preview.html /preview 301
+/automation /automation.html 200
 /automation.html /automation 301
