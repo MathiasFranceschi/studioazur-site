@@ -21,6 +21,8 @@
     <meta name="twitter:title" content="Automatisation pour artisans | Studio Azur">
     <meta name="twitter:description" content="Votre site travaille pendant que vous êtes sur le chantier. Découvrez comment vos clients vous trouvent tout seuls.">
     <meta name="twitter:image" content="https://studioazur.dev/logo-studioazur.webp">
+    <meta name="theme-color" content="#2b4a6f">
+    <link rel="manifest" href="/manifest.json">
     <link rel="icon" type="image/svg+xml" href="/favicon.svg">
     <link rel="icon" type="image/x-icon" href="/favicon.ico">
     <link rel="apple-touch-icon" href="/apple-touch-icon.png">
@@ -385,6 +387,13 @@
                 }, 1200);
             });
         });
+    </script>
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', function() {
+                navigator.serviceWorker.register('/sw.js');
+            });
+        }
     </script>
 </body>
 </html>

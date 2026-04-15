@@ -1,0 +1,24 @@
+{
+  "name": "Studio Azur — Agence web Côte d'Azur",
+  "short_name": "Studio Azur",
+  "description": "Création de sites web sur-mesure pour artisans et commerces à Nice, Cannes, Antibes.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#f8f5f0",
+  "theme_color": "#2b4a6f",
+  "lang": "fr",
+  "icons": [
+    {
+      "src": "/apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}
