@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0f1520"/>
+      <stop offset="100%" style="stop-color:#1a2e4a"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#2980b9"/>
+      <stop offset="100%" style="stop-color:#c2693d"/>
+    </linearGradient>
+    <linearGradient id="wave" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#2b7a9e;stop-opacity:0.6"/>
+      <stop offset="100%" style="stop-color:#1a5276;stop-opacity:0.4"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1200" height="630" fill="url(#bg)"/>
+
+  <!-- Decorative wave shape -->
+  <path d="M0 400 Q200 350 400 400 Q600 450 800 390 Q1000 330 1200 380 L1200 630 L0 630 Z" fill="url(#wave)" opacity="0.3"/>
+  <path d="M0 450 Q300 400 600 430 Q900 460 1200 420 L1200 630 L0 630 Z" fill="#2980b9" opacity="0.08"/>
+
+  <!-- Top accent line -->
+  <rect x="80" y="80" width="120" height="3" fill="url(#accent)"/>
+
+  <!-- Logo circle -->
+  <circle cx="80" cy="170" r="28" stroke="#c9a84c" stroke-width="1.5" fill="none"/>
+  <path d="M52 170 A28 28 0 0 0 108 170 Q96 165 84 170 Q72 175 60 170 Q56 168 52 170 Z" fill="#2b7a9e" opacity="0.7"/>
+  <circle cx="80" cy="152" r="7" fill="#c9a84c"/>
+
+  <!-- Studio Azur wordmark -->
+  <text x="120" y="180" font-family="Georgia, serif" font-size="28" font-weight="400" fill="#f0ece4" letter-spacing="2">Studio Azur</text>
+
+  <!-- Tag line -->
+  <text x="80" y="255" font-family="Georgia, serif" font-size="14" fill="#c9a84c" letter-spacing="4" text-transform="uppercase">AGENCE WEB — CÔTE D'AZUR</text>
+
+  <!-- Main headline -->
+  <text x="80" y="340" font-family="Georgia, serif" font-size="64" font-weight="300" fill="#f0ece4" letter-spacing="-1">Votre savoir-faire</text>
+  <text x="80" y="415" font-family="Georgia, serif" font-size="64" font-weight="300" fill="#f0ece4" letter-spacing="-1">mérite une vitrine</text>
+  <text x="80" y="490" font-family="Georgia, serif" font-size="64" font-weight="300" font-style="italic" fill="#e3d5a0" letter-spacing="-1">à la hauteur</text>
+
+  <!-- Right side decorative element -->
+  <circle cx="1050" cy="315" r="180" stroke="#2980b9" stroke-width="0.8" fill="none" opacity="0.15"/>
+  <circle cx="1050" cy="315" r="130" stroke="#c9a84c" stroke-width="0.5" fill="none" opacity="0.12"/>
+  <circle cx="1050" cy="315" r="80" stroke="#c2693d" stroke-width="0.5" fill="none" opacity="0.1"/>
+
+  <!-- Bottom bar -->
+  <rect x="0" y="575" width="1200" height="55" fill="#0a0f1a" opacity="0.6"/>
+  <text x="80" y="609" font-family="Arial, sans-serif" font-size="13" fill="#8a9aaa" letter-spacing="2">Nice · Cannes · Antibes</text>
+  <text x="880" y="609" font-family="Arial, sans-serif" font-size="13" fill="#8a9aaa" letter-spacing="1">studioazur.dev</text>
+</svg>

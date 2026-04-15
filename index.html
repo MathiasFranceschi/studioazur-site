@@ -6,7 +6,7 @@
     <meta http-equiv="X-Content-Type-Options" content="nosniff">
     <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
     <meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=()">
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; script-src 'self' 'unsafe-inline'; connect-src 'self' https://formsubmit.co; form-action 'self' https://formsubmit.co; img-src 'self' data:;">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; script-src 'self' 'unsafe-inline' https://va.vercel-scripts.com; connect-src 'self' https://formsubmit.co https://vitals.vercel-insights.com; form-action 'self' https://formsubmit.co; img-src 'self' data: https://studioazur.dev;">
     <title>Studio Azur — Création site web artisan Nice | Agence web Côte d'Azur</title>
     <meta name="description" content="Création site web artisan Nice — Sites internet sur-mesure pour artisans, commerces et indépendants à Nice, Cannes, Antibes. Design premium, SEO local, livraison 7 jours. Studio Azur, agence web Côte d'Azur.">
     <meta property="og:title" content="Studio Azur — Création site web artisan Nice | Agence web Côte d'Azur">
@@ -15,17 +15,22 @@
     <meta property="og:url" content="https://studioazur.dev">
     <meta property="og:locale" content="fr_FR">
     <meta property="og:site_name" content="Studio Azur">
-    <meta property="og:image" content="https://studioazur.dev/logo-studioazur.webp">
+    <meta property="og:image" content="https://studioazur.dev/img/og-card.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:type" content="image/png">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Studio Azur — Création site web artisan Nice | Agence web Côte d'Azur">
     <meta name="twitter:description" content="Création site web artisan Nice — Sites internet sur-mesure pour artisans et commerces. Design premium, SEO local, livraison 7 jours.">
-    <meta name="twitter:image" content="https://studioazur.dev/logo-studioazur.webp">
+    <meta name="twitter:image" content="https://studioazur.dev/img/og-card.png">
     <meta name="theme-color" content="#2b4a6f">
     <link rel="manifest" href="/manifest.json">
     <link rel="icon" type="image/svg+xml" href="/favicon.svg">
     <link rel="icon" type="image/x-icon" href="/favicon.ico">
     <link rel="apple-touch-icon" href="/apple-touch-icon.png">
     <link rel="canonical" href="https://studioazur.dev">
+    <link rel="alternate" hreflang="fr" href="https://studioazur.dev">
+    <link rel="alternate" hreflang="x-default" href="https://studioazur.dev">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preload" as="image" href="img/hero-nice.webp" type="image/webp">
@@ -59,6 +64,34 @@
         "priceRange": "Sur devis",
         "serviceType": ["Création de site web", "SEO local", "Design web", "Automatisation business"],
         "knowsAbout": ["création site web artisan Nice", "agence web Côte d'Azur", "site internet artisan", "SEO local Nice Cannes Antibes"]
+    },{
+        "@context": "https://schema.org",
+        "@type": "Service",
+        "name": "Création de site web pour artisans",
+        "provider": {
+            "@type": "LocalBusiness",
+            "name": "Studio Azur",
+            "url": "https://studioazur.dev"
+        },
+        "serviceType": "Création de site web",
+        "description": "Sites internet sur-mesure pour artisans, commerces et indépendants — design premium, SEO local, livraison en 7 jours. Nice, Cannes, Antibes.",
+        "areaServed": {
+            "@type": "GeoCircle",
+            "geoMidpoint": { "@type": "GeoCoordinates", "latitude": 43.7102, "longitude": 7.2620 },
+            "geoRadius": "50000"
+        },
+        "offers": {
+            "@type": "AggregateOffer",
+            "priceCurrency": "EUR",
+            "offerCount": "3",
+            "lowPrice": "490",
+            "highPrice": "990",
+            "priceSpecification": {
+                "@type": "PriceSpecification",
+                "priceCurrency": "EUR",
+                "description": "Sur devis selon les besoins"
+            }
+        }
     }]
     </script>
 </head>
