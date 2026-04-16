@@ -1,6 +1,5 @@
 {
   "rewrites": [
-    { "source": "/r/:code", "destination": "/api/r?c=:code" },
     { "source": "/preview", "destination": "/preview.html" },
     { "source": "/automation", "destination": "/automation.html" }
   ],
