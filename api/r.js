@@ -1,4 +1,3 @@
-// Outreach click-tracking redirect — FEL-82
 const CODE_RE = /^[a-zA-Z0-9_-]{1,32}$/;
 const HOME = 'https://studioazur.dev';
 
