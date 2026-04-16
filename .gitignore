@@ -1,1 +1,4 @@
 .wrangler/
+.playwright-mcp/
+screenshot-desktop-*.png
+screenshot-mobile-*.png
